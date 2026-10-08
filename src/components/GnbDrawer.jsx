@@ -5,7 +5,7 @@ const productItems = [
   { label: '티 제품', to: '/products' },
   { label: '티푸드', href: 'https://www.osulloc.com/kr/ko/shop/item/list?category=bakery' },
   { label: '라이프스타일', href: 'https://www.osulloc.com/kr/ko/shop/item/list?category=themashop' },
-  { label: '차 취향 찾기', to: '/finder', isNew: true },
+  { label: '차 취향 찾기', to: '/', isNew: true },
 ]
 
 const utilityItems = ['매장찾기', '공지사항', '고객센터', '뷰티포인트 추후 적립']

@@ -1,14 +1,29 @@
 import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import arrowIcon from '../assets/icon-arrow.png'
+import CardCarousel from '../components/CardCarousel.jsx'
+import cartIcon from '../assets/icon-cart.png'
+import menuIcon from '../assets/icon-menu.png'
+import GnbDrawer from '../components/GnbDrawer.jsx'
+import blendedCitrusImg from '../assets/option-blended-citrus.jpg'
+import blendedFloralImg from '../assets/option-blended-floral.png'
+import blendedFruityImg from '../assets/option-blended-fruity.jpg'
+import blendedHerbalImg from '../assets/option-blended-herbal.png'
+import blendedNuttyImg from '../assets/option-blended-nutty.png'
+import drinkColdImg from '../assets/option-drink-cold.jpg'
+import drinkMilkImg from '../assets/option-drink-milk.jpg'
+import herbFloralImg from '../assets/option-herb-floral.png'
+import herbFruityImg from '../assets/option-herb-fruity.png'
 import pureFermentedImg from '../assets/option-pure-fermented.jpg'
+import pureHerbImg from '../assets/option-pure-herb.jpg'
 import pureGreenImg from '../assets/option-pure-green.png'
 import pureMatchaImg from '../assets/option-pure-matcha.jpg'
 import { supabase } from '../lib/supabaseClient'
 
 const CARDS = [
-  { key: 'time', title: 'Time Card', question: '언제 차를 마시고 싶은가요?' },
-  { key: 'mood', title: 'Mood Card', question: '오늘 나에게 필요한 것은 무엇인가요?' },
-  { key: 'flavor', title: 'Flavor Card', question: '어떤 맛과 향을 좋아하세요?' },
+  { key: 'time', title: 'Time', question: '언제 차를 마시고 싶은가요?' },
+  { key: 'mood', title: 'Mood', question: '오늘 나에게 필요한 것은 무엇인가요?' },
+  { key: 'flavor', title: 'Flavor', question: '어떤 맛과 향을 좋아하세요?' },
 ]
 
 const LETTERS = ['a', 'b', 'c', 'd', 'e', 'f']
@@ -18,13 +33,22 @@ const CATEGORY_LABELS = {
   pure_tea: { name: '순수차', enName: 'Pure Tea', desc: '한 가지 재료 본연의 맛을 즐기는 차' },
   blended_tea: { name: '블렌디드', enName: 'Blended Tea', desc: '여러 재료가 어우러진 풍부한 맛과 향의 차' },
   drink_type: { name: '음료형', enName: 'Tea Drink', desc: '음료처럼 즐기는 차' },
-  pure_herb: { name: '순수허브', enName: 'Pure Herb', desc: '한 가지 허브 본연의 향을 즐기는 차' },
+  pure_herb: { name: '순수허브', enName: 'Pure Herb', desc: '원물 본연의 향을 즐길 수 있는 순수 루이보스티' },
   blended_herb: { name: '블렌디드 허브', enName: 'Blended Herb', desc: '여러 허브가 어우러진 풍성한 맛과 향의 차' },
   green_tea: { name: '녹차', desc: '제주 차밭의 햇살을 담은, 산뜻하고 가벼운 녹차' },
   matcha: { name: '말차', desc: '고소하고 진한 맛의 차' },
   fermented_tea: { name: '발효차·홍차', desc: '향이 깊고 진한 맛의 차' },
-  citrus: { name: '시트러스', desc: '상큼한 향의 차' },
-  floral: { name: '플로럴', desc: '화사한 꽃향의 차' },
+  citrus: {
+    name: '시트러스',
+    desc: '상큼한 향의 차',
+    banner: '제주의 자연에서 온 다양한 Citrus향의 블렌디드티를 추천할게요',
+    tags: ['영귤', '유자', '귤꽃', '레몬'],
+  },
+  floral: {
+    name: '플로럴',
+    desc: '화사한 꽃향의 차',
+    tags: ['동백', '귤꽃', '벚꽃', '유채꽃', '캐모마일', '라벤더', '장미'],
+  },
   nutty: { name: '너티', desc: '구수하고 고소한 향의 차' },
   fruity: { name: '프루티', desc: '달콤한 향의 차' },
   herbal: { name: '허벌', desc: '은은하고 편안한 향의 차' },
@@ -72,9 +96,9 @@ function getFlavorQuestion(caffeineGroup) {
     title: 'Flavor',
     question: '어떤 맛과 향을 좋아하세요?',
     options: [
-      { label: '한 가지 재료가 주는 깊고 진한 맛과 향이 좋아요', value: 'pure_tea' },
-      { label: '여러 재료가 어우러진 풍부한 맛과 향이 좋아요', value: 'blended_tea' },
-      { label: '달콤하거나 상큼하게, 음료처럼 즐기고 싶어요', value: 'drink_type' },
+      { label: '차 그대로의 맛과 향이 좋아요', value: 'pure_tea' },
+      { label: '차에 다채로운 향이 더해진 풍성한 맛이 좋아요', value: 'blended_tea' },
+      { label: '차를 음료처럼 편하게 즐기는 게 좋아요', value: 'drink_type' },
     ],
   }
 }
@@ -91,6 +115,7 @@ const PURE_TEA_SUBQUESTION = {
     },
     { label: '고소하고 쌉싸름한 맛이 좋아요', value: 'matcha', image: pureMatchaImg },
     { label: '깊은 향과 묵직한 여운이 좋아요', value: 'fermented_tea', image: pureFermentedImg },
+    { label: '포근하고 달큰한 향이 좋아요', value: 'pure_herb', image: pureHerbImg },
   ],
 }
 
@@ -98,11 +123,11 @@ const BLENDED_TEA_SUBQUESTION = {
   title: 'Blended Tea Flavor',
   question: '어떤 맛과 향을 더 좋아하세요?',
   options: [
-    { label: '상큼한 맛과 향이 좋아요', enLabel: 'Citrus', value: 'citrus' },
-    { label: '화사한 꽃향과 맛이 좋아요', enLabel: 'Floral', value: 'floral' },
-    { label: '구수하고 고소한 맛과 향이 좋아요', enLabel: 'Nutty', value: 'nutty' },
-    { label: '달콤한 맛과 향이 좋아요', enLabel: 'Fruity', value: 'fruity' },
-    { label: '은은하고 편안한 맛과 향이 좋아요', enLabel: 'Herbal', value: 'herbal' },
+    { label: '상큼한 맛과 향이 좋아요', enLabel: 'Citrus', value: 'citrus', image: blendedCitrusImg },
+    { label: '화사한 꽃향과 맛이 좋아요', enLabel: 'Floral', value: 'floral', image: blendedFloralImg },
+    { label: '구수하고 고소한 맛과 향이 좋아요', enLabel: 'Nutty', value: 'nutty', image: blendedNuttyImg },
+    { label: '달콤한 맛과 향이 좋아요', enLabel: 'Fruity', value: 'fruity', image: blendedFruityImg },
+    { label: '은은하고 편안한 맛과 향이 좋아요', enLabel: 'Herbal', value: 'herbal', image: blendedHerbalImg },
   ],
 }
 
@@ -110,8 +135,8 @@ const DRINK_TYPE_SUBQUESTION = {
   title: 'Tea Drink Style',
   question: '어떤 스타일의 음료가 좋으세요?',
   options: [
-    { label: '우유와 함께 즐기고 싶어요', value: 'milk_style' },
-    { label: '가볍고 시원한 음료가 좋아요', value: 'cold_style' },
+    { label: '우유와 함께 즐기고 싶어요', value: 'milk_style', image: drinkMilkImg },
+    { label: '가볍고 시원한 음료가 좋아요', value: 'cold_style', image: drinkColdImg },
   ],
 }
 
@@ -119,8 +144,8 @@ const HERB_BLEND_SUBQUESTION = {
   title: 'Herbal Tea Flavor',
   question: '과일향이 느껴지는 편이 좋으세요?',
   options: [
-    { label: '은은한 과일향이 좋아요', value: 'fruity_herb' },
-    { label: '플로럴, 풀향 같은 허브 본연의 향이 좋아요', value: 'herbal_essence' },
+    { label: '은은한 과일향이 좋아요', value: 'fruity_herb', image: herbFruityImg },
+    { label: '플로럴, 풀향 같은 허브 본연의 향이 좋아요', value: 'herbal_essence', image: herbFloralImg },
   ],
 }
 
@@ -164,9 +189,16 @@ const FRUITY_HERB_NAMES = [
 
 const HERBAL_ESSENCE_NAMES = ['페퍼민트 브리즈', '캐모마일 라벤더', '바질 보타닉 가든']
 const MATCHA_PLUS_NAMES = ['말차플러스 그린', '말차플러스 유자', '말차플러스 자몽']
+const PURE_HERB_NAMES = ['루이보스 퓨어', '찬물 루이보스티']
 const KOMBUCHA_NAMES = ['콤부차 애플민트', '콤부차 베리', '콤부차 레몬']
 
 const AROMA_TAG_NAME = { citrus: '시트러스', floral: '플로럴', nutty: '너티', fruity: '프루티', herbal: '허벌' }
+
+// 시트러스 결과 화면의 세부 태그(영귤/유자/귤꽃/레몬) 버튼을 누르면 보여줄 상품명 목록
+const CITRUS_TAG_NAMES = {
+  영귤: ['제주삼다영귤티', '삼다연 제주영귤 3입', '삼다연 제주영귤 10입', '삼다연 제주영귤 20입'],
+  유자: ['시그니처 얼그레이 10입', '시그니처 얼그레이 20입', '유자 얼그레이'],
+}
 
 // ── 상품 매칭 판단 함수들 (각자 독립된 기준으로 조합해서 사용) ──
 const GREEN_TEA_NAMES = ['세작', '제주 순수 녹차', '일로향', '우전']
@@ -181,6 +213,9 @@ function isPureTeaType(product, sub) {
   }
   if (sub === 'fermented_tea') {
     return product.base === '홍차/발효차' && isPureFormat
+  }
+  if (sub === 'pure_herb') {
+    return PURE_HERB_NAMES.includes(product.name)
   }
   return false
 }
@@ -212,7 +247,7 @@ function resolveScreen(selectedCard, path) {
     if (timeAns === undefined) return { type: 'question', q: TIME_QUESTION }
     if (flavorAns === undefined) return { type: 'question', q: getFlavorQuestion(timeAns) }
     if (flavorAns === 'pure_herb') {
-      return { type: 'result', matcher: (p) => p.name === '루이보스 퓨어' }
+      return { type: 'result', matcher: (p) => PURE_HERB_NAMES.includes(p.name) }
     }
     if (subAns === undefined) {
       const q = SUBQUESTION_BY_FLAVOR[flavorAns]
@@ -245,7 +280,7 @@ function resolveScreen(selectedCard, path) {
       if (subAns === undefined) return { type: 'question', q: CALMING_SUBQUESTION }
       const intro = '차분하게 쉬고 싶은 기분에 어울리는 차를 모아봤어요'
       if (subAns === 'single') {
-        return { type: 'result', intro, matcher: (p) => isPureTeaAny(p) || p.name === '루이보스 퓨어' }
+        return { type: 'result', intro, matcher: (p) => isPureTeaAny(p) || PURE_HERB_NAMES.includes(p.name) }
       }
       return {
         type: 'result',
@@ -351,35 +386,88 @@ function ResultList({ matcher, depsKey, intro }) {
         <p className="mt-4 text-sm text-gray-500">조건에 맞는 상품을 찾지 못했어요.</p>
       )}
 
-      <div className="mt-4 flex flex-col gap-3">
+      <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-5">
         {products.map((p) => (
-          <div key={p.id} className="rounded-[2px] border border-black px-4 py-4">
-            <div className="flex items-center gap-1.5">
-              <p className="text-sm font-semibold">{p.name}</p>
-              {p.is_caffeine_free && (
-                <span className="rounded-[2px] bg-sub-light px-1.5 py-0.5 text-[10px] text-gray-700">
-                  무카페인
-                </span>
-              )}
-            </div>
-            <p className="mt-1 text-xs text-gray-500">
-              {p.base} · {p.format} · {p.price.toLocaleString()}원
-            </p>
-          </div>
+          <ProductCard key={p.id} product={p} />
         ))}
       </div>
     </div>
   )
 }
 
+const THUMB_COLORS = {
+  '녹차/말차/호지차': 'bg-sub-light',
+  '홍차/발효차': 'bg-amber-100',
+  허브: 'bg-rose-100',
+}
+
+function HeartIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 20.5C12 20.5 3.5 15.5 3.5 9.5C3.5 6.5 5.8 4.5 8.5 4.5C10 4.5 11.3 5.2 12 6.3C12.7 5.2 14 4.5 15.5 4.5C18.2 4.5 20.5 6.5 20.5 9.5C20.5 15.5 12 20.5 12 20.5Z"
+        stroke="black"
+        strokeWidth="1.2"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+function ProductCard({ product: p }) {
+  const thumbColor = THUMB_COLORS[p.base] ?? 'bg-gray-100'
+
+  return (
+    <Link to={`/products/${p.id}`} className="block text-left">
+      <div className={`relative aspect-square w-full rounded-[2px] ${thumbColor}`}>
+        <button
+          type="button"
+          aria-label="찜하기"
+          onClick={(e) => e.preventDefault()}
+          className="absolute top-2 right-2 flex h-7 w-7 items-center justify-center rounded-full bg-white/90"
+        >
+          <HeartIcon />
+        </button>
+        <span
+          aria-hidden="true"
+          className="absolute right-2 bottom-2 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow"
+        >
+          <img src={cartIcon} alt="" className="h-4 w-4" />
+        </span>
+      </div>
+
+      <div className="mt-3">
+        {p.is_caffeine_free && (
+          <span className="mb-1 inline-block rounded-[2px] bg-sub-light px-1 py-0.5 text-[9px] text-gray-700">
+            무카페인
+          </span>
+        )}
+        <p className="text-sm leading-tight font-bold">{p.name}</p>
+        <p className="mt-1.5 text-xs text-gray-400">
+          {p.base} | {p.format}
+        </p>
+        <p className="mt-2 text-sm font-bold">{p.price.toLocaleString()}원</p>
+      </div>
+    </Link>
+  )
+}
+
 // 선택지 카드 하나. opt.image를 넣으면 위에 이미지가 뜨고, 없으면 지금처럼 텍스트만 나옴
 function OptionButton({ opt, letter, onSelect }) {
+  const [selected, setSelected] = useState(false)
+
+  const handleClick = () => {
+    if (selected) return
+    setSelected(true)
+    setTimeout(() => onSelect(opt.value), 180)
+  }
+
   if (opt.image) {
     return (
       <button
         type="button"
-        onClick={() => onSelect(opt.value)}
-        className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] text-left transition active:scale-[0.98]"
+        onClick={handleClick}
+        className="group relative aspect-[4/5] w-full overflow-hidden rounded-[2px] text-left transition active:scale-[0.98]"
       >
         <img
           src={opt.image}
@@ -387,15 +475,15 @@ function OptionButton({ opt, letter, onSelect }) {
           className="absolute inset-0 h-full w-full object-cover"
           style={{ objectPosition: opt.imagePosition ?? 'center' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-black/20" />
-        <span className="absolute top-3 left-1/2 -translate-x-1/2 text-sm font-normal text-white drop-shadow">
-          {letter}
-        </span>
-        <div className="relative flex h-full flex-col items-center justify-end px-2 pb-4 text-center text-xs tracking-tight whitespace-nowrap text-white">
-          <span className="font-normal drop-shadow">
-            {opt.enLabel && <span>{opt.enLabel} </span>}
-            {opt.label}
-          </span>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/5 to-black/10" />
+        <div
+          className={`absolute inset-0 bg-primary transition-opacity duration-150 ${
+            selected ? 'opacity-70' : 'opacity-0 group-hover:opacity-70'
+          }`}
+        />
+        <div className="relative flex h-full flex-col items-center justify-end px-2 pb-4 text-center text-xs tracking-tight text-white">
+          {opt.enLabel && <span className="font-semibold drop-shadow">{opt.enLabel}</span>}
+          <span className="font-normal drop-shadow">{opt.label}</span>
           {SHOW_OPTION_CAPTION && CATEGORY_LABELS[opt.value] && (
             <span className="mt-1 text-xs text-white/80">{CATEGORY_LABELS[opt.value].name}</span>
           )}
@@ -407,17 +495,20 @@ function OptionButton({ opt, letter, onSelect }) {
   return (
     <button
       type="button"
-      onClick={() => onSelect(opt.value)}
-      className="flex flex-col items-start gap-2 overflow-hidden rounded-[2px] border border-black text-left text-sm transition active:scale-[0.98]"
+      onClick={handleClick}
+      className={`flex flex-col items-center gap-2 overflow-hidden rounded-[2px] border border-black text-center text-sm transition-colors duration-150 active:scale-[0.98] ${
+        selected ? 'bg-primary text-white' : 'bg-white text-black hover:bg-primary hover:text-white'
+      }`}
     >
-      <div className="flex flex-col items-start gap-1 px-4 pb-4 pt-4">
+      <div className="flex flex-col items-center gap-1 px-4 pb-4 pt-4">
         <span>
-          <span className="font-bold">{letter}.</span>{' '}
           {opt.enLabel && <span className="font-bold">{opt.enLabel} </span>}
           {opt.label}
         </span>
         {SHOW_OPTION_CAPTION && CATEGORY_LABELS[opt.value] && (
-          <span className="text-xs text-gray-400">{CATEGORY_LABELS[opt.value].name}</span>
+          <span className={`text-xs ${selected ? 'text-white/80' : 'text-gray-400'}`}>
+            {CATEGORY_LABELS[opt.value].name}
+          </span>
         )}
       </div>
     </button>
@@ -425,11 +516,15 @@ function OptionButton({ opt, letter, onSelect }) {
 }
 
 function Finder() {
+  const navigate = useNavigate()
   // step 0: 카드 선택 화면, step 1~: 질문/결과 화면
   const [step, setStep] = useState(0)
   const [selectedCard, setSelectedCard] = useState(null)
+  const [menuOpen, setMenuOpen] = useState(false)
   // 답한 값을 순서대로 저장 (카드마다 슬롯의 의미가 다름 — resolveScreen에서 해석)
   const [path, setPath] = useState([])
+  // 결과 화면의 세부 태그(영귤/유자 등) 필터 — 기본값은 전부 선택(=전체 노출)
+  const [selectedTags, setSelectedTags] = useState(new Set())
 
   const handleSelectCard = (key) => {
     setSelectedCard(key)
@@ -457,6 +552,21 @@ function Finder() {
   // 바로 전 단계에서 고른 값이 카테고리면, 확인 배너로 보여줌
   const lastValue = path[step - 2]
   const bannerCategory = lastValue ? CATEGORY_LABELS[lastValue] : null
+
+  // 결과 화면이 바뀌면 세부 태그를 다시 전부 선택 상태로 초기화 (=전체 노출)
+  useEffect(() => {
+    setSelectedTags(new Set(bannerCategory?.tags ?? []))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lastValue])
+
+  const toggleTag = (tag) => {
+    setSelectedTags((prev) => {
+      const next = new Set(prev)
+      if (next.has(tag)) next.delete(tag)
+      else next.add(tag)
+      return next
+    })
+  }
 
   return (
     <div>
@@ -511,27 +621,28 @@ function Finder() {
         </div>
       )}
 
-      <div className={step > 0 ? 'px-6 pt-5' : 'px-6 pt-6'}>
+      {step === 0 && (
+        <div className="px-6 pt-6">
+          <button
+            type="button"
+            aria-label="메뉴 열기"
+            onClick={() => setMenuOpen(true)}
+            className="flex h-6 w-6 items-center justify-center"
+          >
+            <img src={menuIcon} alt="" className="h-6 w-6" />
+          </button>
+        </div>
+      )}
+
+      <GnbDrawer open={menuOpen} onClose={() => setMenuOpen(false)} />
+
+      <div className={step > 0 ? 'px-6 pt-5' : 'px-6 pt-4'}>
         {step === 0 && (
           <div className="pt-4 text-center">
-            <h1 className="text-xl font-bold">Find Your Taste</h1>
-            <p className="mt-2 text-sm text-gray-600">먼저 답하고 싶은 질문의 카드를 골라주세요.</p>
+            <h1 className="text-xl font-bold tracking-wide uppercase">Pick the Card</h1>
+            <p className="mt-2 text-sm text-gray-600">먼저 답하고 싶은 질문카드를 골라주세요.</p>
 
-            <div className="mt-6 flex gap-3">
-              {CARDS.map((card) => (
-                <button
-                  key={card.key}
-                  type="button"
-                  onClick={() => handleSelectCard(card.key)}
-                  className="flex h-56 flex-1 flex-col items-center justify-center rounded-[2px] border border-black px-2 text-center transition active:scale-[0.98]"
-                >
-                  <span className="text-sm font-bold">{card.title}</span>
-                  <span className="mt-2 text-xs leading-relaxed tracking-tight break-keep text-gray-700">
-                    {card.question}
-                  </span>
-                </button>
-              ))}
-            </div>
+            <CardCarousel cards={CARDS} onSelect={handleSelectCard} />
           </div>
         )}
 
@@ -560,11 +671,37 @@ function Finder() {
           </div>
         )}
 
+        {screen?.type === 'result' && bannerCategory?.tags && (
+          <div className="mb-5 flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {bannerCategory.tags.map((tag) => {
+              const selected = selectedTags.has(tag)
+              return (
+                <button
+                  key={tag}
+                  type="button"
+                  onClick={() => toggleTag(tag)}
+                  className={`shrink-0 rounded-full border px-4 py-2 text-sm transition-colors ${
+                    selected ? 'border-sub bg-sub text-white' : 'border-gray-300 text-gray-700'
+                  }`}
+                >
+                  {tag}
+                </button>
+              )
+            })}
+          </div>
+        )}
+
         {screen?.type === 'result' && (
           <ResultList
-            matcher={screen.matcher}
+            matcher={
+              bannerCategory?.tags && selectedTags.size < bannerCategory.tags.length
+                ? (p) =>
+                    screen.matcher(p) &&
+                    [...selectedTags].some((t) => CITRUS_TAG_NAMES[t]?.includes(p.name))
+                : screen.matcher
+            }
             intro={screen.intro}
-            depsKey={`${selectedCard}-${path.join('|')}`}
+            depsKey={`${selectedCard}-${path.join('|')}-${[...selectedTags].sort().join(',')}`}
           />
         )}
       </div>
