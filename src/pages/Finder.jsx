@@ -142,7 +142,7 @@ const BLENDED_TEA_SUBQUESTION = {
     { label: '상큼한 맛과 향이 좋아요', enLabel: 'Citrus', value: 'citrus', image: blendedCitrusImg },
     { label: '화사한 꽃향과 맛이 좋아요', enLabel: 'Floral', value: 'floral', image: blendedFloralImg },
     { label: '구수하고 고소한 맛과 향이 좋아요', enLabel: 'Nutty', value: 'nutty', image: blendedNuttyImg },
-    { label: '달콤한 맛과 향이 좋아요', enLabel: 'Fruity', value: 'fruity', image: blendedFruityImg },
+    { label: '다채로운 과일의 맛과 향이 좋아요', enLabel: 'Fruity', value: 'fruity', image: blendedFruityImg },
     { label: '은은하고 편안한 맛과 향이 좋아요', enLabel: 'Herbal', value: 'herbal', image: blendedHerbalImg },
     { label: '달콤하고 부드러운 맛과 향이 좋아요', enLabel: 'Sweet', value: 'sweet', image: blendedSweetImg },
   ],
