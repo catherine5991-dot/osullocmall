@@ -170,8 +170,8 @@ const HERB_BLEND_SUBQUESTION = {
   title: 'Herbal Tea Flavor',
   question: '과일향이 느껴지는 편이 좋으세요?',
   options: [
-    { label: '은은한 과일향이 좋아요', value: 'fruity_herb', image: herbFruityImg },
-    { label: '싱그러운 풀향, 꽃향의 편안함이 좋아요', value: 'herbal_essence', image: herbFloralImg },
+    { label: '은은하고 달콤한 과일향이 좋아요', value: 'fruity_herb', image: herbFruityImg },
+    { label: '싱그러운 허브 본연의 향이 좋아요', value: 'herbal_essence', image: herbFloralImg },
   ],
 }
 
