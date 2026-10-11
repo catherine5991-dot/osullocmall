@@ -11,12 +11,24 @@ const THUMB_COLORS = {
 }
 
 // 상품의 베이스 분류로 필터 버튼 구성 (실제 DB 베이스 값 기준)
+// '블렌디드티'는 베이스 값이 아니라 맛과 향(flavor_aroma) 태그가 붙은 상품을 모아 보여주는 특수 필터
 const BASE_FILTERS = [
   { label: '전체', value: null },
   { label: '녹차 · 말차 · 호지차', value: '녹차/말차/호지차' },
   { label: '홍차 · 발효차', value: '홍차/발효차' },
-  { label: '허브', value: '허브' },
+  { label: '블렌디드티', value: 'blended' },
+  { label: '허브티', value: '허브' },
 ]
+
+function hasFlavorAromaTag(p) {
+  return (p.product_tags ?? []).some((pt) => pt.tags?.category === 'flavor_aroma')
+}
+
+function matchesBaseFilter(p, value) {
+  if (!value) return true
+  if (value === 'blended') return hasFlavorAromaTag(p)
+  return p.base === value
+}
 
 function HeartIcon() {
   return (
@@ -136,7 +148,7 @@ function ProductList() {
   }, [])
 
   const filtered = products
-    .filter((p) => (activeBase ? p.base === activeBase : true))
+    .filter((p) => matchesBaseFilter(p, activeBase))
     .filter((p) => matchesFilters(p, filters))
 
   return (
@@ -210,7 +222,7 @@ function ProductList() {
         open={filterOpen}
         onClose={() => setFilterOpen(false)}
         tags={tags}
-        products={products.filter((p) => (activeBase ? p.base === activeBase : true))}
+        products={products.filter((p) => matchesBaseFilter(p, activeBase))}
         appliedFilters={filters}
         onApply={setFilters}
       />
