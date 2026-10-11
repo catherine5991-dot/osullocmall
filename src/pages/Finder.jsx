@@ -340,6 +340,7 @@ function resolveScreen(selectedCard, path) {
         type: 'result',
         matcher: (p) =>
           COLD_NAMES.includes(p.name) ||
+          GREEN_TEA_NAMES.includes(p.name) ||
           (p.format === '찬물스틱티백' && (hasAromaTag(p, 'citrus') || hasAromaTag(p, 'fruity'))),
       }
     }
