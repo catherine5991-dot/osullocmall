@@ -50,7 +50,7 @@ const CATEGORY_LABELS = {
     desc: '은은한 Floral 향과 섬세한 풍미가 어우러진 블렌디드티',
     tags: ['동백', '귤꽃', '벚꽃', '캐모마일', '장미'],
   },
-  nutty: { name: '너티', desc: '구수하고 고소한 향의 차' },
+  nutty: { name: '너티', desc: '고소한 Nutty 향과 깊은 풍미의 블렌디드티' },
   fruity: { name: '프루티', desc: '달콤한 향의 차' },
   herbal: { name: '허벌', desc: '은은하고 편안한 향의 차' },
   milk_style: { name: '밀크티', desc: '우유와 함께 즐기는 차' },
