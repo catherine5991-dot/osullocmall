@@ -94,6 +94,7 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('시그니처 얼그레이 20입', NULL, NULL, 27000, '홍차/발효차', '피라미드티백', false),
   ('벚꽃향 가득한 올레 10입', NULL, NULL, 16500, '홍차/발효차', '피라미드티백', false),
   ('삼다연 제주영귤 30g', NULL, NULL, 15000, '홍차/발효차', '잎차', false),
+  ('페퍼민트 브리즈 10입', '시원한 페퍼민트 허브티', '상쾌한 민트향으로 기분전환하기 좋은 무카페인 허브티예요', 16500, '허브', '피라미드티백', true),
   ('벚꽃향 가득한 올레 3입', NULL, NULL, 5500, '홍차/발효차', '피라미드티백', false),
   ('말차플러스 콜라겐', NULL, NULL, 12000, '녹차/말차/호지차', '가루차', false),
   ('베리 가든 그린티 10입', '싱그러운 베리향 그린티', '제주 녹차에 상큼한 베리향을 더했어요', 16500, '녹차/말차/호지차', '피라미드티백', false),
@@ -292,4 +293,5 @@ select p.id, t.id from public.products p, public.tags t where
   or  (p.name = '스윗 허니 블랙티' and t.name = '스윗' and t.category = 'flavor_aroma')
   or  (p.name = '삼다꿀배티' and t.name = '스윗' and t.category = 'flavor_aroma')
   or  (p.name = '허니 살구향 그린티' and t.name = '스윗' and t.category = 'flavor_aroma')
-  or  (p.name = '달빛 꿀배 콜드브루 티' and t.name = '스윗' and t.category = 'flavor_aroma');
+  or  (p.name = '달빛 꿀배 콜드브루 티' and t.name = '스윗' and t.category = 'flavor_aroma')
+  or  (p.name = '페퍼민트 브리즈 10입' and t.name = '허벌' and t.category = 'flavor_aroma');

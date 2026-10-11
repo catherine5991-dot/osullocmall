@@ -208,7 +208,7 @@ const FRUITY_HERB_NAMES = [
   '루이보스 체리벨벳 10입',
 ]
 
-const HERBAL_ESSENCE_NAMES = ['캐모마일 라벤더', '바질 보타닉 가든 10입']
+const HERBAL_ESSENCE_NAMES = ['캐모마일 라벤더', '바질 보타닉 가든 10입', '페퍼민트 브리즈 10입']
 const MATCHA_PLUS_NAMES = ['말차플러스 프로바이오틱스', '말차플러스 테아닌', '말차플러스 콜라겐']
 const PURE_HERB_NAMES = ['루이보스 퓨어 10입', '찬물 루이보스티']
 const KOMBUCHA_NAMES = ['콤부차 애플파인', '콤부차 리치피치', '콤부차 깔라망고']
