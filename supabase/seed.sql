@@ -104,7 +104,6 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('제주 말차 오트 블렌드', '오트밀크와 어우러진 말차', '제주 말차에 고소한 오트밀크를 더했어요', 9500, '녹차/말차/호지차', '가루차', false, false),
   ('제주 말차샷 블렌드', null, null, 13000, '녹차/말차/호지차', '가루차', false, false),
   ('제주 삼다 영귤티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
-  ('제주 순수 녹차', '산뜻하고 가벼운 풍미의 녹차', '제주 화산토 다원에서 자란 찻잎을 그대로 덖어 만들었어요', 12000, '녹차/말차/호지차', '잎차', false, true),
   ('제주 순수 녹차', null, null, 11000, '녹차/말차/호지차', '종이티백', false, false),
   ('제주 호지샷 블렌드', null, null, 13000, '녹차/말차/호지차', '가루차', false, false),
   ('제주 호지차 밀크티', '구수한 호지차 밀크티', '제주에서 볶아낸 호지차를 우유와 함께 담았어요', 13000, '녹차/말차/호지차', '가루차', false, false),
@@ -144,7 +143,6 @@ where
    or   (p.name = '캐모마일 라벤더' and t.name = '캐모마일')
    or   (p.name = '스윗 히비스커스' and t.name = '히비스커스')
    or   (p.name = '멜로우 민트' and t.name = '민트')
-   or   (p.name = '제주 순수 녹차' and t.name = '아침을 깨워주는')
    or   (p.name = '프리미엄 말차' and t.name = '아침을 깨워주는')
    or   (p.name = '제주 말차 밀크티' and t.name = '디저트와 함께')
    or   (p.name = '스윗 히비스커스' and t.name = '디저트와 함께')
