@@ -57,15 +57,24 @@ export function matchesBaseFilter(p, label) {
 }
 
 // 카드/상세페이지에 보여줄 베이스 텍스트. 녹차/말차/호지차는 세분화하고,
-// 밀크티·블렌디드티에도 같이 해당하면 같이 표기
+// 밀크티·블렌디드티·허브티에도 같이 해당하면 같이 표기
 export function getDisplayBase(p) {
+  const blended = hasFlavorAromaTag(p)
+
+  // 허브 블렌디드류는 '블렌디드티, 허브티'로 둘 다 표기
+  if (p.base === '허브') return blended ? '블렌디드티, 허브티' : p.base
+
   // 홍차/발효차 블렌디드류는 베이스를 따로 안 보여주고 '블렌디드티'로만 표기
-  if (p.base === '홍차/발효차' && hasFlavorAromaTag(p)) return '블렌디드티'
+  if (p.base === '홍차/발효차') return blended ? '블렌디드티' : p.base
+
   if (p.base !== '녹차/말차/호지차') return p.base
+
   if (GREEN_EXTRA_NAMES.includes(p.name)) return '녹차, 말차'
   const isMatcha = p.name.includes('말차') || MATCHA_OVERRIDE_NAMES.includes(p.name)
   if (isMatcha && MILK_NAMES.includes(p.name)) return '말차, 밀크티'
-  if (isMatcha && hasFlavorAromaTag(p)) return '말차, 블렌디드티'
+  if (isMatcha && MATCHA_KEEP_IN_MATCHA_NAMES.includes(p.name) && blended) return '말차, 블렌디드티'
+  // 말차가 아닌 녹차/호지차 베이스의 블렌디드류는 '블렌디드티'로만 표기
+  if (blended) return '블렌디드티'
   if (isMatcha) return '말차'
   if (p.name.includes('호지')) return '호지차'
   return '녹차'

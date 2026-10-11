@@ -69,7 +69,7 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('말차플러스 콜라겐', null, null, 12000, '녹차/말차/호지차', '가루차', false, false),
   ('말차플러스 테아닌', null, null, 12000, '녹차/말차/호지차', '가루차', false, false),
   ('말차플러스 프로바이오틱스', null, null, 12000, '녹차/말차/호지차', '가루차', false, false),
-  ('멜로우 민트', '부드러운 민트향 허브티', '편안하고 부드러운 민트 블렌드예요', 12000, '허브', '피라미드티백', true, false),
+  ('멜로우 민트', '부드러운 민트향 허브티', '편안하고 부드러운 민트 블렌드예요', 12000, '허브', '종이티백', true, false),
   ('무화과 쇼콜라 블랙티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
   ('무화과 애플 블랙티 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
   ('무화과 애플 블랙티 20입', null, null, 27000, '홍차/발효차', '피라미드티백', false, false),
