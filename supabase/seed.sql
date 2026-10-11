@@ -259,8 +259,6 @@ select p.id, t.id from public.products p, public.tags t where
   or  (p.name = '마롱 글라세 블랙티' and t.name = '너티' and t.category = 'flavor_aroma')
   or  (p.name = '마롱 크림 블랙티 10입' and t.name = '너티' and t.category = 'flavor_aroma')
   or  (p.name = '마롱 크림 블랙티 20입' and t.name = '너티' and t.category = 'flavor_aroma')
-  or  (p.name = '바닐라 허니 블랙티' and t.name = '허벌' and t.category = 'flavor_aroma')
-  or  (p.name = '스윗 허니 블랙티' and t.name = '허벌' and t.category = 'flavor_aroma')
   or  (p.name = '루이보스 문라이트 3입' and t.name = '프루티' and t.category = 'flavor_aroma')
   or  (p.name = '루이보스 체리벨벳 10입' and t.name = '프루티' and t.category = 'flavor_aroma')
   or  (p.name = '스윗 히비스커스 콜드브루 티' and t.name = '프루티' and t.category = 'flavor_aroma')
@@ -289,4 +287,6 @@ select p.id, t.id from public.products p, public.tags t where
   or  (p.name = '체리 루이보스' and t.name = '체리' and t.category = 'raw_material')
   or  (p.name = '체리 루이보스' and t.name = '프루티' and t.category = 'flavor_aroma')
   or  (p.name = '베리 가든 그린티 10입' and t.name = '프루티' and t.category = 'flavor_aroma')
-  or  (p.name = '베리 가든 그린티 20입' and t.name = '프루티' and t.category = 'flavor_aroma');
+  or  (p.name = '베리 가든 그린티 20입' and t.name = '프루티' and t.category = 'flavor_aroma')
+  or  (p.name = '바닐라 허니 블랙티' and t.name = '스윗' and t.category = 'flavor_aroma')
+  or  (p.name = '스윗 허니 블랙티' and t.name = '스윗' and t.category = 'flavor_aroma');
