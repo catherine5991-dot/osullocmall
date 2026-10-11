@@ -38,7 +38,7 @@ const CATEGORY_LABELS = {
   blended_herb: { name: '블렌디드 허브', enName: 'Blended Herb', desc: '여러 허브가 어우러진 풍성한 맛과 향의 차' },
   green_tea: { name: '녹차', desc: '제주 차밭의 햇살을 담은, 산뜻하고 가벼운 녹차' },
   matcha: { name: '말차', desc: '제주 오설록 차밭에서 차광재배로 정성껏 길러낸 말차' },
-  fermented_tea: { name: '발효차·홍차', desc: '향이 깊고 진한 맛의 홍차와 발효차' },
+  fermented_tea: { name: '발효차·홍차', desc: '제주에서 빚어낸 깊은 향과 진한 풍미의 홍차와 발효차' },
   citrus: {
     name: '시트러스',
     desc: '상큼한 향의 차',
