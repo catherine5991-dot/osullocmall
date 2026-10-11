@@ -289,4 +289,7 @@ select p.id, t.id from public.products p, public.tags t where
   or  (p.name = '베리 가든 그린티 10입' and t.name = '프루티' and t.category = 'flavor_aroma')
   or  (p.name = '베리 가든 그린티 20입' and t.name = '프루티' and t.category = 'flavor_aroma')
   or  (p.name = '바닐라 허니 블랙티' and t.name = '스윗' and t.category = 'flavor_aroma')
-  or  (p.name = '스윗 허니 블랙티' and t.name = '스윗' and t.category = 'flavor_aroma');
+  or  (p.name = '스윗 허니 블랙티' and t.name = '스윗' and t.category = 'flavor_aroma')
+  or  (p.name = '삼다꿀배티' and t.name = '스윗' and t.category = 'flavor_aroma')
+  or  (p.name = '허니 살구향 그린티' and t.name = '스윗' and t.category = 'flavor_aroma')
+  or  (p.name = '달빛 꿀배 콜드브루 티' and t.name = '스윗' and t.category = 'flavor_aroma');
