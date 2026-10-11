@@ -74,7 +74,11 @@ const CATEGORY_LABELS = {
     banner: '달콤하고 향긋한 꿀향이 어우러진 블렌디드티',
   },
   milk_style: { name: '밀크티', desc: '우유와 함께 즐기는 차' },
-  cold_style: { name: '콜드', desc: '가볍고 시원하게 즐기는 차' },
+  cold_style: {
+    name: '콜드',
+    desc: '가볍고 시원하게 즐기는 차',
+    banner: '음료처럼 가볍고 청량하게 즐기는 티',
+  },
   fruity_herb: { name: '과일향 허브', desc: '은은한 과일향이 느껴지는 허브차' },
   herbal_essence: { name: '허브 본연의 향', desc: '플로럴하고 풀향 같은 허브 본연의 향' },
   calming: { name: '마음이 편안해지는 기분', banner: '차분하게 긴장을 풀고 싶을 때' },
