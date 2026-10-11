@@ -172,36 +172,39 @@ const CALMING_SUBQUESTION = {
 }
 
 const MILK_NAMES = [
-  '제주말차 밀크티', '얼그레이 밀크티', '제주호지차 밀크티', '호지샷 블렌드', '말차샷 블렌드',
-  '삼다연 오리지널 밀크티', '제주말차 오트블렌드', '가루녹차', '프리미엄말차 밀크용', '마스터즈말차 밀크용',
+  '제주말차 밀크티', '얼그레이 밀크티', '제주호지차 밀크티', '제주 호지샷블렌드', '제주 말차샷블렌드',
+  '삼다연 오리지널 밀크티', '제주말차 오트블렌드', '가루녹차',
 ]
 
 const COLD_NAMES = [
-  '말차플러스 그린', '말차플러스 유자', '말차플러스 자몽', '콤부차 애플민트', '콤부차 베리',
-  '콤부차 레몬', '콜드브루 녹차', '콜드브루 홍차', '콜드브루 자스민', '콜드브루 페퍼민트',
-  '콜드브루 히비스커스', '찬물 녹차 스틱', '찬물 호지차 스틱',
+  '찬물녹차', '말차 콜드브루티', '선샤인 머스캣 콜드브루', '선셋피치 콜드브루 티',
+  '스윗 히비스커스 콜드브루 티', '달빛 꿀배 콜드브루 티',
 ]
 
 const FRUITY_HERB_NAMES = [
-  '피치 캐모마일', '캐모마일 블렌드', '스윗 히비스커스', '체리 루이보스', '캐모마일 로지피치',
-  '멜로우 민트', '루이보스 문라이트', '루이보스 체리벨벳', '히비스커스 콜드브루',
+  '피치 캐모마일', '캐모마일 블렌드 10입', '캐모마일 블렌드 3입', '스윗 히비스커스',
+  '캐모마일 로지피치 10입', '멜로우 민트', '루이보스 문라이트 10입', '루이보스 문라이트 3입',
+  '루이보스 체리벨벳 10입',
 ]
 
-const HERBAL_ESSENCE_NAMES = ['페퍼민트 브리즈', '캐모마일 라벤더', '바질 보타닉 가든']
-const MATCHA_PLUS_NAMES = ['말차플러스 그린', '말차플러스 유자', '말차플러스 자몽']
-const PURE_HERB_NAMES = ['루이보스 퓨어', '찬물 루이보스티']
-const KOMBUCHA_NAMES = ['콤부차 애플민트', '콤부차 베리', '콤부차 레몬']
+const HERBAL_ESSENCE_NAMES = ['캐모마일 라벤더', '바질 보타닉 가든 10입']
+const MATCHA_PLUS_NAMES = ['말차플러스 프로바이오틱스', '말차플러스 테아닌', '말차플러스 콜라겐']
+const PURE_HERB_NAMES = ['루이보스 퓨어 10입', '찬물 루이보스티', '찬물루이보스티']
+const KOMBUCHA_NAMES = ['콤부차 애플파인']
 
 const AROMA_TAG_NAME = { citrus: '시트러스', floral: '플로럴', nutty: '너티', fruity: '프루티', herbal: '허벌' }
 
 // 시트러스 결과 화면의 세부 태그(영귤/유자/귤꽃/레몬) 버튼을 누르면 보여줄 상품명 목록
 const CITRUS_TAG_NAMES = {
-  영귤: ['제주삼다영귤티', '삼다연 제주영귤 3입', '삼다연 제주영귤 10입', '삼다연 제주영귤 20입'],
+  영귤: ['제주 삼다 영귤티', '삼다연 제주영귤 30g', '삼다연 제주영귤 3입'],
   유자: ['시그니처 얼그레이 10입', '시그니처 얼그레이 20입', '유자 얼그레이'],
 }
 
 // ── 상품 매칭 판단 함수들 (각자 독립된 기준으로 조합해서 사용) ──
-const GREEN_TEA_NAMES = ['세작', '제주 순수 녹차', '일로향', '우전']
+const GREEN_TEA_NAMES = [
+  '세작 10입', '세작 20입', '세작 40g', '세작 80g',
+  '제주 순수 녹차', '제주순수녹차', '일로향 60g', '우전 60g',
+]
 
 function isPureTeaType(product, sub) {
   const isPureFormat = product.format !== '찬물스틱티백' && product.format !== '세트'
@@ -209,7 +212,12 @@ function isPureTeaType(product, sub) {
     return GREEN_TEA_NAMES.includes(product.name)
   }
   if (sub === 'matcha') {
-    return product.base === '녹차/말차/호지차' && product.name.includes('말차') && isPureFormat
+    return (
+      product.base === '녹차/말차/호지차' &&
+      product.name.includes('말차') &&
+      isPureFormat &&
+      !MILK_NAMES.includes(product.name)
+    )
   }
   if (sub === 'fermented_tea') {
     return product.base === '홍차/발효차' && isPureFormat
