@@ -182,7 +182,7 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('세작80g', null, null, 15000, '녹차/말차/호지차', '잎차', false, false),
   ('우전 60g', null, null, 15000, '녹차/말차/호지차', '잎차', false, false),
   ('세작10입', null, null, 16500, '녹차/말차/호지차', '피라미드티백', false, false),
-  ('프리미엄말차', null, null, 0, '녹차/말차/호지차', '가루차', false, false),
+  ('프리미엄말차', null, null, 23000, '녹차/말차/호지차', '가루차', false, false),
   ('말차 콜드브루티', null, null, 14000, '녹차/말차/호지차', '찬물스틱티백', false, false),
   ('제주 화산우롱차', null, null, 11000, '홍차/발효차', '종이티백', false, false),
   ('삼다연 80g', null, null, 15000, '홍차/발효차', '잎차', false, false),
@@ -235,18 +235,18 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('시그니처 얼그레이 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
   ('시그니처 얼그레이 20입', null, null, 27000, '홍차/발효차', '피라미드티백', false, false),
   ('웨딩그린티 20입', null, null, 27000, '녹차/말차/호지차', '피라미드티백', false, false),
-  ('제주말차밀크티', null, null, 0, '녹차/말차/호지차', '찬물스틱티백', false, false),
-  ('제주 호지샷블렌드', null, null, 0, '녹차/말차/호지차', '찬물스틱티백', false, false),
-  ('제주 말차샷블렌드', null, null, 0, '녹차/말차/호지차', '찬물스틱티백', false, false),
-  ('제주말차 오트 블렌드', null, null, 0, '녹차/말차/호지차', '찬물스틱티백', false, false),
-  ('말차플러스 프로바이오틱스', null, null, 0, '녹차/말차/호지차', '가루차', false, false),
-  ('말차플러스 테아닌', null, null, 0, '녹차/말차/호지차', '가루차', false, false),
-  ('말차플러스 콜라겐', null, null, 0, '녹차/말차/호지차', '가루차', false, false),
+  ('제주말차밀크티', null, null, 13000, '녹차/말차/호지차', '찬물스틱티백', false, false),
+  ('제주 호지샷블렌드', null, null, 13000, '녹차/말차/호지차', '찬물스틱티백', false, false),
+  ('제주 말차샷블렌드', null, null, 13000, '녹차/말차/호지차', '찬물스틱티백', false, false),
+  ('제주말차 오트 블렌드', null, null, 13000, '녹차/말차/호지차', '찬물스틱티백', false, false),
+  ('말차플러스 프로바이오틱스', null, null, 12000, '녹차/말차/호지차', '가루차', false, false),
+  ('말차플러스 테아닌', null, null, 12000, '녹차/말차/호지차', '가루차', false, false),
+  ('말차플러스 콜라겐', null, null, 12000, '녹차/말차/호지차', '가루차', false, false),
   ('선샤인 머스캣 콜드브루', null, null, 14000, '녹차/말차/호지차', '찬물스틱티백', false, false),
   ('선셋피치 콜드브루 티', null, null, 14000, '홍차/발효차', '찬물스틱티백', false, false),
-  ('콤부차 애플파인', null, null, 0, '허브', '가루차', false, false),
-  ('콤부차 리치피치', null, null, 0, '허브', '가루차', false, false),
-  ('콤부차 깔라망고', null, null, 0, '허브', '가루차', false, false);
+  ('콤부차 애플파인', null, null, 8000, '허브', '가루차', false, false),
+  ('콤부차 리치피치', null, null, 8000, '허브', '가루차', false, false),
+  ('콤부차 깔라망고', null, null, 8000, '허브', '가루차', false, false);
 
 insert into public.product_tags (product_id, tag_id)
 select p.id, t.id from public.products p, public.tags t
