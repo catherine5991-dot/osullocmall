@@ -115,7 +115,6 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('제주화산암차 20입', null, null, 27000, '홍차/발효차', '피라미드티백', false, false),
   ('찬물 녹차', null, null, 9500, '녹차/말차/호지차', '찬물스틱티백', false, false),
   ('찬물 루이보스티', '찬물에 바로 즐기는 루이보스', '언제 어디서든 편안하게 즐겨보세요', 11000, '허브', '찬물스틱티백', true, true),
-  ('찬물루이보스티', null, null, 9500, '허브', '찬물스틱티백', true, false),
   ('청우롱 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
   ('청우롱 50g', null, null, 15000, '홍차/발효차', '잎차', false, false),
   ('캐모마일 라벤더', '플로럴한 허브 본연의 향', '편안한 라벤더와 캐모마일의 조화예요', 12500, '허브', '종이티백', true, false),
@@ -254,4 +253,12 @@ where
    or   (p.name = '마롱 크림 블랙티 20입' and t.name = '너티')
    or   (p.name = '밀키 우롱티 10입' and t.name = '너티')
    or   (p.name = '바닐라 허니 블랙티' and t.name = '허벌')
-   or   (p.name = '스윗 허니 블랙티' and t.name = '허벌');
+   or   (p.name = '스윗 허니 블랙티' and t.name = '허벌')
+   or   (p.name = '루이보스 문라이트 3입' and t.name = '프루티')
+   or   (p.name = '루이보스 체리벨벳 10입' and t.name = '프루티')
+   or   (p.name = '스윗 히비스커스 콜드브루 티' and t.name = '프루티')
+   or   (p.name = '캐모마일 로지피치 10입' and t.name = '프루티')
+   or   (p.name = '히비스커스 선샤인 10입' and t.name = '프루티')
+   or   (p.name = '바질 보타닉 가든 10입' and t.name = '허벌')
+   or   (p.name = '캐모마일 블렌드 10입' and t.name = '허벌')
+   or   (p.name = '캐모마일 블렌드 3입' and t.name = '허벌');

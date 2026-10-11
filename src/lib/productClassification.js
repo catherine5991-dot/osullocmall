@@ -61,8 +61,11 @@ export function matchesBaseFilter(p, label) {
 export function getDisplayBase(p) {
   const blended = hasFlavorAromaTag(p)
 
-  // 허브 블렌디드류는 '블렌디드티, 허브티'로 둘 다 표기
-  if (p.base === '허브') return blended ? '블렌디드티, 허브티' : p.base
+  // 콤부차는 허브 베이스여도 '콤부차'로 따로 표기
+  if (COLD_KOMBUCHA_NAMES.includes(p.name) && p.name.startsWith('콤부차')) return '콤부차'
+
+  // 허브 블렌디드류는 '블렌디드티, 허브티'로 둘 다 표기, 순수 허브티는 '허브티'로 표기
+  if (p.base === '허브') return blended ? '블렌디드티, 허브티' : '허브티'
 
   // 홍차/발효차 블렌디드류는 베이스를 따로 안 보여주고 '블렌디드티'로만 표기.
   // 순수차는 필터 태그와 표기를 맞춰서 '홍차 · 발효차'로 통일
