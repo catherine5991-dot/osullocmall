@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import { getDisplayBase } from '../lib/productClassification.js'
 import { supabase } from '../lib/supabaseClient'
 
 const THUMB_COLORS = {
@@ -147,6 +148,7 @@ function ProductDetail() {
     .map((pt) => pt.tags)
     .filter((t) => t?.category === 'flavor_aroma')
     .map((t) => t.name)
+  const displayBase = getDisplayBase(product)
 
   return (
     <div className="pb-24">
@@ -181,7 +183,8 @@ function ProductDetail() {
         )}
         <h1 className="text-lg font-bold">{product.name}</h1>
         <p className="mt-1 text-sm text-gray-500">
-          {product.base} | {product.format}
+          {displayBase} | {product.format}
+          {aromaTags.length > 0 && !displayBase.includes('블렌디드티') ? ' · 블렌디드티' : ''}
         </p>
         <p className="mt-3 text-xl font-bold">{product.price.toLocaleString()}원</p>
       </div>
@@ -218,7 +221,7 @@ function ProductDetail() {
         <div className="mt-6 flex flex-col gap-3 rounded-[2px] border border-gray-100 bg-gray-50 p-4 text-sm">
           <div className="flex justify-between">
             <span className="text-gray-500">베이스</span>
-            <span className="font-medium">{product.base}</span>
+            <span className="font-medium">{displayBase}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-500">제형</span>

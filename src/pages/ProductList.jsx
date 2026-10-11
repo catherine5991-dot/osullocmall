@@ -3,62 +3,19 @@ import { Link } from 'react-router-dom'
 import cartIcon from '../assets/icon-cart.png'
 import FilterDrawer, { emptyFilters, hasActiveFilters, matchesFilters } from '../components/FilterDrawer.jsx'
 import { supabase } from '../lib/supabaseClient'
+import {
+  BASE_FILTERS,
+  MATCHA_OVERRIDE_NAMES,
+  SORT_LAST_NAMES,
+  getDisplayBase,
+  hasFlavorAromaTag,
+  matchesBaseFilter,
+} from '../lib/productClassification.js'
 
 const THUMB_COLORS = {
   '녹차/말차/호지차': 'bg-sub-light',
   '홍차/발효차': 'bg-amber-100',
   허브: 'bg-rose-100',
-}
-
-// Finder.jsx의 상품명 목록과 동일한 기준 (밀크티류 / 콤부차·콜드브루류)
-const MILK_NAMES = [
-  '제주 말차 밀크티', '얼그레이 밀크티', '제주 호지차 밀크티', '제주 호지샷 블렌드', '제주 말차샷 블렌드',
-  '삼다연 오리지널 밀크티', '제주 말차 오트 블렌드', '가루녹차',
-]
-const COLD_KOMBUCHA_NAMES = [
-  '찬물 녹차', '말차 콜드브루 티', '선샤인 머스캣 콜드브루 티', '선셋피치 콜드브루 티',
-  '스윗 히비스커스 콜드브루 티', '달빛 꿀배 콜드브루 티', '콤부차 애플파인',
-]
-
-// 이름에 '말차'가 있어도 함께 녹차로도 보여주고 싶은 예외 상품
-const GREEN_EXTRA_NAMES = ['말차 콜드브루 티']
-
-// 이름순 정렬과 상관없이 항상 목록 맨 뒤로 보낼 상품
-const SORT_LAST_NAMES = ['말차 콜드브루 티']
-
-function hasFlavorAromaTag(p) {
-  return (p.product_tags ?? []).some((pt) => pt.tags?.category === 'flavor_aroma')
-}
-
-// 이름에 "말차"가 없어도 실질적으로 말차류인 상품 (가루녹차 = 말차 가루)
-const MATCHA_OVERRIDE_NAMES = ['가루녹차']
-
-// 녹차/말차/호지차 베이스를 이름으로 세분화. 블렌디드티(맛과 향 태그)가 붙은 상품은 여기서 제외하고
-// 블렌디드티 쪽에서만 보여줌 (허브티/홍차·발효차와 달리 녹차/말차/호지차엔 블렌디드류를 섞지 않음)
-function isPureGMH(p, kind) {
-  if (p.base !== '녹차/말차/호지차') return false
-  if (hasFlavorAromaTag(p)) return false
-  const isMatcha = p.name.includes('말차') || MATCHA_OVERRIDE_NAMES.includes(p.name)
-  if (kind === 'matcha') return isMatcha
-  if (kind === 'hoji') return p.name.includes('호지')
-  return !isMatcha && !p.name.includes('호지')
-}
-
-const BASE_FILTERS = [
-  { label: '녹차', test: (p) => isPureGMH(p, 'green') || GREEN_EXTRA_NAMES.includes(p.name) },
-  { label: '말차', test: (p) => isPureGMH(p, 'matcha') },
-  { label: '호지차', test: (p) => isPureGMH(p, 'hoji') },
-  { label: '홍차 · 발효차', test: (p) => p.base === '홍차/발효차' },
-  { label: '블렌디드티', test: (p) => hasFlavorAromaTag(p) },
-  { label: '허브티', test: (p) => p.base === '허브' },
-  { label: '밀크티', test: (p) => MILK_NAMES.includes(p.name) },
-  { label: '콤부차 · 콜드브루티', test: (p) => COLD_KOMBUCHA_NAMES.includes(p.name) },
-]
-
-function matchesBaseFilter(p, label) {
-  if (!label) return true
-  const pill = BASE_FILTERS.find((f) => f.label === label)
-  return pill ? pill.test(p) : true
 }
 
 function HeartIcon() {
@@ -101,18 +58,6 @@ function ListIcon() {
   )
 }
 
-// 카드에 보여줄 베이스 텍스트. 녹차/말차/호지차는 세분화해서 표기
-function getDisplayBase(p) {
-  if (p.base !== '녹차/말차/호지차') return p.base
-  if (GREEN_EXTRA_NAMES.includes(p.name)) return '녹차, 말차'
-  const isMatcha = p.name.includes('말차') || MATCHA_OVERRIDE_NAMES.includes(p.name)
-  if (isMatcha && MILK_NAMES.includes(p.name)) return '말차, 밀크티'
-  if (isMatcha && hasFlavorAromaTag(p)) return '말차, 블렌디드티'
-  if (isMatcha) return '말차'
-  if (p.name.includes('호지')) return '호지차'
-  return '녹차'
-}
-
 function ProductCard({ product: p, layout }) {
   const thumbColor = THUMB_COLORS[p.base] ?? 'bg-gray-100'
   const aromaTags = (p.product_tags ?? [])
@@ -144,7 +89,7 @@ function ProductCard({ product: p, layout }) {
         <p className="text-sm font-semibold">{p.name}</p>
         <p className="mt-1 text-xs text-gray-500">
           {displayBase} | {p.format}
-          {aromaTags.length > 0 ? ' · 블렌디드티' : ''}
+          {aromaTags.length > 0 && !displayBase.includes('블렌디드티') ? ' · 블렌디드티' : ''}
         </p>
         <p className="mt-1 text-sm font-semibold">{p.price.toLocaleString()}원</p>
       </div>
