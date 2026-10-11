@@ -5,6 +5,7 @@ import CardCarousel from '../components/CardCarousel.jsx'
 import cartIcon from '../assets/icon-cart.png'
 import menuIcon from '../assets/icon-menu.png'
 import GnbDrawer from '../components/GnbDrawer.jsx'
+import { getDisplayBase } from '../lib/productClassification.js'
 import blendedCitrusImg from '../assets/option-blended-citrus.jpg'
 import blendedFloralImg from '../assets/option-blended-floral.png'
 import blendedFruityImg from '../assets/option-blended-fruity.jpg'
@@ -452,7 +453,7 @@ function ProductCard({ product: p }) {
         )}
         <p className="text-sm leading-tight font-bold">{p.name}</p>
         <p className="mt-1.5 text-xs text-gray-400">
-          {p.base} | {p.format}
+          {getDisplayBase(p)} | {p.format}
         </p>
         <p className="mt-2 text-sm font-bold">{p.price.toLocaleString()}원</p>
       </div>
