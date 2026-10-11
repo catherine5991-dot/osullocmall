@@ -32,7 +32,7 @@ const LETTERS = ['a', 'b', 'c', 'd', 'e', 'f']
 // 라벨명/설명은 여기 한 곳에서만 수정하면 전체 화면(확인 배너)에 반영됨
 const CATEGORY_LABELS = {
   pure_tea: { name: '순수차', enName: 'Pure Tea', desc: '한 가지 재료 본연의 맛을 즐길 수 있는 순수차' },
-  blended_tea: { name: '블렌디드', enName: 'Blended Tea', desc: '여러 재료가 어우러진 풍부한 맛과 향의 차' },
+  blended_tea: { name: '블렌디드', enName: 'Blended Tea', desc: '여러 재료가 어우러진 풍부한 맛과 향의 블렌디드티' },
   drink_type: { name: '음료형', enName: 'Tea Drink', desc: '음료처럼 즐기는 차' },
   pure_herb: { name: '순수허브', enName: 'Pure Herb', desc: '포근하고 달큰한 원물 본연의 향을 즐기는 순수 루이보스티' },
   blended_herb: { name: '블렌디드 허브', enName: 'Blended Herb', desc: '여러 허브가 어우러진 풍성한 맛과 향의 차' },
