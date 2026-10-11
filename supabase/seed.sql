@@ -226,4 +226,6 @@ where
    or   (p.name = '선샤인 머스캣 콜드브루 티' and t.name = '프루티')
    or   (p.name = '말차플러스 콜라겐' and t.name = '프루티')
    or   (p.name = '말차플러스 테아닌' and t.name = '시트러스')
-   or   (p.name = '말차플러스 프로바이오틱스' and t.name = '프루티');
+   or   (p.name = '말차플러스 프로바이오틱스' and t.name = '프루티')
+   or   (p.name = '달빛 걷기 35g' and t.name = '프루티')
+   or   (p.name = '달빛 꿀배 콜드브루 티' and t.name = '프루티');
