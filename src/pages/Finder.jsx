@@ -190,13 +190,14 @@ const KOMBUCHA_NAMES = ['콤부차 애플파인', '콤부차 리치피치', '콤
 
 const AROMA_TAG_NAME = { citrus: '시트러스', floral: '플로럴', nutty: '너티', fruity: '프루티', herbal: '허벌' }
 
-// 시트러스 결과 화면의 세부 태그(영귤/유자/귤꽃/레몬) 버튼을 누르면 보여줄 상품명 목록
-const CITRUS_TAG_NAMES = {
+// 블렌디드 결과 화면의 세부 태그 버튼을 누르면 보여줄 상품명 목록 (시트러스: 영귤/유자, 플로럴: 동백 등)
+const DETAIL_TAG_NAMES = {
   영귤: [
     '제주 삼다 영귤티', '삼다연 제주영귤 30g', '삼다연 제주영귤 3입',
     '귤꽃향을 품은 우잣담 10입', '귤꽃향을 품은 우잣담 20입',
   ],
   유자: ['시그니처 얼그레이 10입', '시그니처 얼그레이 20입', '유자 얼그레이'],
+  동백: ['동백이 피는 곶자왈 10입', '동백이 피는 곶자왈 3입', '제주 동백꽃 티'],
 }
 
 // ── 상품 매칭 판단 함수들 (각자 독립된 기준으로 조합해서 사용) ──
@@ -709,7 +710,7 @@ function Finder() {
           <ResultList
             matcher={
               bannerCategory?.tags && selectedTags.size < bannerCategory.tags.length
-                ? (p) => [...selectedTags].some((t) => CITRUS_TAG_NAMES[t]?.includes(p.name))
+                ? (p) => [...selectedTags].some((t) => DETAIL_TAG_NAMES[t]?.includes(p.name))
                 : screen.matcher
             }
             intro={screen.intro}
