@@ -106,6 +106,7 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('제주 삼다 영귤티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
   ('제주 순수 녹차', null, null, 11000, '녹차/말차/호지차', '종이티백', false, false),
   ('제주 호지샷 블렌드', null, null, 13000, '녹차/말차/호지차', '가루차', false, false),
+  ('제주 호지차', null, null, 11000, '녹차/말차/호지차', '종이티백', false, false),
   ('제주 호지차 밀크티', '구수한 호지차 밀크티', '제주에서 볶아낸 호지차를 우유와 함께 담았어요', 13000, '녹차/말차/호지차', '가루차', false, false),
   ('제주 화산우롱차', null, null, 11000, '홍차/발효차', '종이티백', false, false),
   ('제주숲홍차 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
