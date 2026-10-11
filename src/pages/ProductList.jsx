@@ -95,13 +95,21 @@ function ListIcon() {
   )
 }
 
+// 카드에 보여줄 베이스 텍스트. 녹차/말차/호지차는 세분화해서 표기
+function getDisplayBase(p) {
+  if (p.base !== '녹차/말차/호지차') return p.base
+  if (p.name.includes('말차') || MATCHA_OVERRIDE_NAMES.includes(p.name)) return '말차'
+  if (p.name.includes('호지')) return '호지차'
+  return '녹차'
+}
+
 function ProductCard({ product: p, layout }) {
   const thumbColor = THUMB_COLORS[p.base] ?? 'bg-gray-100'
   const aromaTags = (p.product_tags ?? [])
     .map((pt) => pt.tags)
     .filter((t) => t?.category === 'flavor_aroma')
     .map((t) => t.name)
-  const displayBase = MATCHA_OVERRIDE_NAMES.includes(p.name) ? '말차' : p.base
+  const displayBase = getDisplayBase(p)
 
   return (
     <Link to={`/products/${p.id}`} className={layout === 'list' ? 'flex gap-3 text-left' : 'block text-left'}>
