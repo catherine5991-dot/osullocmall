@@ -171,7 +171,7 @@ const HERB_BLEND_SUBQUESTION = {
   question: '과일향이 느껴지는 편이 좋으세요?',
   options: [
     { label: '은은한 과일향이 좋아요', value: 'fruity_herb', image: herbFruityImg },
-    { label: '플로럴, 풀향 같은 허브 본연의 향이 좋아요', value: 'herbal_essence', image: herbFloralImg },
+    { label: '풀향 같은 싱그럽고 편안한 허브향이 좋아요', value: 'herbal_essence', image: herbFloralImg },
   ],
 }
 
