@@ -10,23 +10,45 @@ const THUMB_COLORS = {
   허브: 'bg-rose-100',
 }
 
-// 상품의 베이스 분류로 필터 버튼 구성 (실제 DB 베이스 값 기준)
-// '블렌디드티'는 베이스 값이 아니라 맛과 향(flavor_aroma) 태그가 붙은 상품을 모아 보여주는 특수 필터
-const BASE_FILTERS = [
-  { label: '녹차 · 말차 · 호지차', value: '녹차/말차/호지차' },
-  { label: '홍차 · 발효차', value: '홍차/발효차' },
-  { label: '블렌디드티', value: 'blended' },
-  { label: '허브티', value: '허브' },
+// Finder.jsx의 상품명 목록과 동일한 기준 (밀크티류 / 콤부차·콜드브루류)
+const MILK_NAMES = [
+  '제주 말차 밀크티', '얼그레이 밀크티', '제주 호지차 밀크티', '제주 호지샷 블렌드', '제주 말차샷 블렌드',
+  '삼다연 오리지널 밀크티', '제주 말차 오트 블렌드', '가루녹차',
+]
+const COLD_KOMBUCHA_NAMES = [
+  '찬물녹차', '말차 콜드브루 티', '선샤인 머스캣 콜드브루 티', '선셋피치 콜드브루 티',
+  '스윗 히비스커스 콜드브루 티', '달빛 꿀배 콜드브루 티', '콤부차 애플파인',
 ]
 
 function hasFlavorAromaTag(p) {
   return (p.product_tags ?? []).some((pt) => pt.tags?.category === 'flavor_aroma')
 }
 
-function matchesBaseFilter(p, value) {
-  if (!value) return true
-  if (value === 'blended') return hasFlavorAromaTag(p)
-  return p.base === value
+// 녹차/말차/호지차 베이스 중, 밀크티·콤부차&콜드브루티·블렌디드티로 이미 분류되지 않은 "순수차"만 이름으로 세분화
+function isPureGMH(p, kind) {
+  if (p.base !== '녹차/말차/호지차') return false
+  if (MILK_NAMES.includes(p.name) || COLD_KOMBUCHA_NAMES.includes(p.name)) return false
+  if (hasFlavorAromaTag(p)) return false
+  if (kind === 'matcha') return p.name.includes('말차')
+  if (kind === 'hoji') return p.name.includes('호지')
+  return !p.name.includes('말차') && !p.name.includes('호지')
+}
+
+const BASE_FILTERS = [
+  { label: '녹차', test: (p) => isPureGMH(p, 'green') },
+  { label: '말차', test: (p) => isPureGMH(p, 'matcha') },
+  { label: '호지차', test: (p) => isPureGMH(p, 'hoji') },
+  { label: '홍차 · 발효차', test: (p) => p.base === '홍차/발효차' },
+  { label: '블렌디드티', test: (p) => hasFlavorAromaTag(p) },
+  { label: '허브티', test: (p) => p.base === '허브' },
+  { label: '밀크티', test: (p) => MILK_NAMES.includes(p.name) },
+  { label: '콤부차 & 콜드브루티', test: (p) => COLD_KOMBUCHA_NAMES.includes(p.name) },
+]
+
+function matchesBaseFilter(p, label) {
+  if (!label) return true
+  const pill = BASE_FILTERS.find((f) => f.label === label)
+  return pill ? pill.test(p) : true
 }
 
 function HeartIcon() {
@@ -175,12 +197,12 @@ function ProductList() {
 
       <div className="mt-5 flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {BASE_FILTERS.map((f) => {
-          const selected = activeBase === f.value
+          const selected = activeBase === f.label
           return (
             <button
               key={f.label}
               type="button"
-              onClick={() => setActiveBase(selected ? null : f.value)}
+              onClick={() => setActiveBase(selected ? null : f.label)}
               className={`shrink-0 rounded-full border px-4 py-2 text-sm transition-colors ${
                 selected ? 'border-primary bg-primary text-white' : 'border-gray-300 text-gray-700'
               }`}
