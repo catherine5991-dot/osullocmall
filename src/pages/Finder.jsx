@@ -54,6 +54,7 @@ const CATEGORY_LABELS = {
   fruity: {
     name: '프루티',
     desc: '달콤한 향의 차',
+    banner: '달콤하고 싱그러운 Fruity 향이 어우러진 블렌디드티',
     tags: ['복숭아', '배', '귤', '망고·파파야', '체리', '무화과', '사과', '머스캣'],
   },
   herbal: { name: '허벌', desc: '은은하고 편안한 향의 차' },
