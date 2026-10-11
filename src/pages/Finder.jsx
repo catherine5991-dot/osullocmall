@@ -561,9 +561,9 @@ function OptionButton({ opt, letter, onSelect }) {
             selected ? 'opacity-70' : 'opacity-0 group-hover:opacity-70'
           }`}
         />
-        <div className="relative flex h-full flex-col items-center justify-end px-2 pb-4 text-center text-xs tracking-tight text-white">
+        <div className="relative flex h-full flex-col items-center justify-end px-2 pb-4 text-center text-xs tracking-tighter text-white">
           {opt.enLabel && <span className="font-semibold drop-shadow">{opt.enLabel}</span>}
-          <span className="font-normal drop-shadow">{opt.label}</span>
+          <span className="font-normal whitespace-nowrap drop-shadow">{opt.label}</span>
           {SHOW_OPTION_CAPTION && CATEGORY_LABELS[opt.value] && (
             <span className="mt-1 text-xs text-white/80">{CATEGORY_LABELS[opt.value].name}</span>
           )}
