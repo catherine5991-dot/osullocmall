@@ -5,7 +5,7 @@ import CardCarousel from '../components/CardCarousel.jsx'
 import cartIcon from '../assets/icon-cart.png'
 import menuIcon from '../assets/icon-menu.png'
 import GnbDrawer from '../components/GnbDrawer.jsx'
-import { getDisplayBase } from '../lib/productClassification.js'
+import { MILK_NAMES, getDisplayBase } from '../lib/productClassification.js'
 import blendedCitrusImg from '../assets/option-blended-citrus.jpg'
 import blendedFloralImg from '../assets/option-blended-floral.png'
 import blendedFruityImg from '../assets/option-blended-fruity.jpg'
@@ -172,11 +172,6 @@ const CALMING_SUBQUESTION = {
   ],
 }
 
-const MILK_NAMES = [
-  '제주 말차 밀크티', '얼그레이 밀크티', '제주 호지차 밀크티', '제주 호지샷 블렌드', '제주 말차샷 블렌드',
-  '삼다연 오리지널 밀크티', '제주 말차 오트 블렌드', '가루녹차',
-]
-
 const COLD_NAMES = [
   '찬물 녹차', '말차 콜드브루 티', '선샤인 머스캣 콜드브루 티', '선셋피치 콜드브루 티',
   '스윗 히비스커스 콜드브루 티', '달빛 꿀배 콜드브루 티',
@@ -190,7 +185,7 @@ const FRUITY_HERB_NAMES = [
 
 const HERBAL_ESSENCE_NAMES = ['캐모마일 라벤더', '바질 보타닉 가든 10입']
 const MATCHA_PLUS_NAMES = ['말차플러스 프로바이오틱스', '말차플러스 테아닌', '말차플러스 콜라겐']
-const PURE_HERB_NAMES = ['루이보스 퓨어 10입', '찬물 루이보스티', '찬물루이보스티']
+const PURE_HERB_NAMES = ['루이보스 퓨어 10입', '찬물 루이보스티']
 const KOMBUCHA_NAMES = ['콤부차 애플파인']
 
 const AROMA_TAG_NAME = { citrus: '시트러스', floral: '플로럴', nutty: '너티', fruity: '프루티', herbal: '허벌' }
