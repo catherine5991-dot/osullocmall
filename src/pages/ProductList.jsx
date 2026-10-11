@@ -40,7 +40,7 @@ const BASE_FILTERS = [
   { label: '블렌디드티', test: (p) => hasFlavorAromaTag(p) },
   { label: '허브티', test: (p) => p.base === '허브' },
   { label: '밀크티', test: (p) => MILK_NAMES.includes(p.name) },
-  { label: '콤부차 & 콜드브루티', test: (p) => COLD_KOMBUCHA_NAMES.includes(p.name) },
+  { label: '콤부차 · 콜드브루티', test: (p) => COLD_KOMBUCHA_NAMES.includes(p.name) },
 ]
 
 function matchesBaseFilter(p, label) {
