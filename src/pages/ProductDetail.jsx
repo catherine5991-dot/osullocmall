@@ -176,12 +176,14 @@ function ProductDetail() {
 
       {/* 2. 상품명 + 3. 가격정보 */}
       <div className="px-6 pt-5 text-left">
-        {product.is_caffeine_free && (
-          <span className="mb-1 inline-block rounded-[2px] bg-sub-light px-1.5 py-0.5 text-[10px] text-gray-700">
-            무카페인
-          </span>
-        )}
-        <h1 className="text-lg font-bold">{product.name}</h1>
+        <h1 className="flex items-center gap-1.5 text-lg font-bold">
+          {product.name}
+          {product.is_caffeine_free && (
+            <span className="shrink-0 rounded-[2px] bg-sub-light px-1.5 py-0.5 text-[10px] font-normal text-gray-700">
+              무카페인
+            </span>
+          )}
+        </h1>
         <p className="mt-1 text-sm text-gray-500">
           {displayBase} | {product.format}
           {aromaTags.length > 0 && !displayBase.includes('블렌디드티') ? ' · 블렌디드티' : ''}

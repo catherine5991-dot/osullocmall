@@ -460,12 +460,14 @@ function ProductCard({ product: p }) {
       </div>
 
       <div className="mt-3">
-        {p.is_caffeine_free && (
-          <span className="mb-1 inline-block rounded-[2px] bg-sub-light px-1 py-0.5 text-[9px] text-gray-700">
-            무카페인
-          </span>
-        )}
-        <p className="text-sm leading-tight font-bold">{p.name}</p>
+        <p className="flex items-center gap-1 text-sm leading-tight font-bold">
+          {p.name}
+          {p.is_caffeine_free && (
+            <span className="shrink-0 rounded-[2px] bg-sub-light px-1 py-0.5 text-[9px] font-normal text-gray-700">
+              무카페인
+            </span>
+          )}
+        </p>
         <p className="mt-1.5 text-xs text-gray-400">
           {getDisplayBase(p)} | {p.format}
         </p>
