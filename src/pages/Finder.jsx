@@ -335,7 +335,14 @@ function resolveScreen(selectedCard, path) {
     const [moodAns, subAns] = path
     if (moodAns === undefined) return { type: 'question', q: MOOD_QUESTION }
 
-    if (moodAns === 'refreshing') return { type: 'result', matcher: (p) => COLD_NAMES.includes(p.name) }
+    if (moodAns === 'refreshing') {
+      return {
+        type: 'result',
+        matcher: (p) =>
+          COLD_NAMES.includes(p.name) ||
+          (p.format === '찬물스틱티백' && (hasAromaTag(p, 'citrus') || hasAromaTag(p, 'fruity'))),
+      }
+    }
     if (moodAns === 'reward') return { type: 'result', matcher: (p) => MILK_NAMES.includes(p.name) }
     if (moodAns === 'adventurous') {
       return {
