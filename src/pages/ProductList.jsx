@@ -23,6 +23,9 @@ const COLD_KOMBUCHA_NAMES = [
 // 이름에 '말차'가 있어도 함께 녹차로도 보여주고 싶은 예외 상품
 const GREEN_EXTRA_NAMES = ['말차 콜드브루 티']
 
+// 이름순 정렬과 상관없이 항상 목록 맨 뒤로 보낼 상품
+const SORT_LAST_NAMES = ['말차 콜드브루 티']
+
 function hasFlavorAromaTag(p) {
   return (p.product_tags ?? []).some((pt) => pt.tags?.category === 'flavor_aroma')
 }
@@ -101,6 +104,7 @@ function ListIcon() {
 // 카드에 보여줄 베이스 텍스트. 녹차/말차/호지차는 세분화해서 표기
 function getDisplayBase(p) {
   if (p.base !== '녹차/말차/호지차') return p.base
+  if (GREEN_EXTRA_NAMES.includes(p.name)) return '녹차, 말차'
   if (p.name.includes('말차') || MATCHA_OVERRIDE_NAMES.includes(p.name)) return '말차'
   if (p.name.includes('호지')) return '호지차'
   return '녹차'
@@ -167,7 +171,11 @@ function ProductList() {
           setStatus('error')
           return
         }
-        setProducts(data)
+        // 이름 기준 정렬 상관없이 항상 맨 뒤로 보낼 상품
+        const sorted = [...data].sort(
+          (a, b) => SORT_LAST_NAMES.includes(a.name) - SORT_LAST_NAMES.includes(b.name),
+        )
+        setProducts(sorted)
         setStatus('ready')
       })
 
