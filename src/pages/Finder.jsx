@@ -133,7 +133,7 @@ const PURE_TEA_SUBQUESTION = {
   question: '어떤 느낌의 맛을 더 좋아하세요?',
   options: [
     {
-      label: '산뜻하고 가벼운 맛이 좋아요',
+      label: '산뜻하고 은은한 맛이 좋아요',
       value: 'green_tea',
       image: pureGreenImg,
       imagePosition: 'center 100%',
