@@ -105,7 +105,10 @@ function ListIcon() {
 function getDisplayBase(p) {
   if (p.base !== '녹차/말차/호지차') return p.base
   if (GREEN_EXTRA_NAMES.includes(p.name)) return '녹차, 말차'
-  if (p.name.includes('말차') || MATCHA_OVERRIDE_NAMES.includes(p.name)) return '말차'
+  const isMatcha = p.name.includes('말차') || MATCHA_OVERRIDE_NAMES.includes(p.name)
+  if (isMatcha && MILK_NAMES.includes(p.name)) return '말차, 밀크티'
+  if (isMatcha && hasFlavorAromaTag(p)) return '말차, 블렌디드티'
+  if (isMatcha) return '말차'
   if (p.name.includes('호지')) return '호지차'
   return '녹차'
 }
