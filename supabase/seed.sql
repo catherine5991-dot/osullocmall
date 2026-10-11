@@ -121,6 +121,8 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('캐모마일 로지피치 10입', null, null, 16500, '허브', '피라미드티백', true, false),
   ('캐모마일 블렌드 10입', null, null, 16500, '허브', '피라미드티백', true, false),
   ('캐모마일 블렌드 3입', null, null, 5500, '허브', '피라미드티백', true, false),
+  ('콤부차 깔라망고', null, null, 8000, '허브', '가루차', false, false),
+  ('콤부차 리치피치', null, null, 8000, '허브', '가루차', false, false),
   ('콤부차 애플파인', null, null, 8000, '허브', '가루차', false, false),
   ('프리미엄 말차', '고소하고 진한 말차 본연의 맛', '제주 다원에서 자란 찻잎을 그대로 갈아만든 순수 말차예요', 28000, '녹차/말차/호지차', '가루차', false, true),
   ('피차 파파야 블랙티 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
@@ -261,4 +263,8 @@ where
    or   (p.name = '히비스커스 선샤인 10입' and t.name = '프루티')
    or   (p.name = '바질 보타닉 가든 10입' and t.name = '허벌')
    or   (p.name = '캐모마일 블렌드 10입' and t.name = '허벌')
-   or   (p.name = '캐모마일 블렌드 3입' and t.name = '허벌');
+   or   (p.name = '캐모마일 블렌드 3입' and t.name = '허벌')
+   or   (p.name = '콤부차 리치피치' and t.name = '리치')
+   or   (p.name = '콤부차 리치피치' and t.name = '복숭아')
+   or   (p.name = '콤부차 깔라망고' and t.name = '깔라만시')
+   or   (p.name = '콤부차 깔라망고' and t.name = '망고');
