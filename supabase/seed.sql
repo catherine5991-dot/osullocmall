@@ -38,9 +38,7 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('말차샷 블렌드', '진한 말차 샷 블렌드', '제주 다원의 말차를 더 진하게 추출했어요', 10000, '녹차/말차/호지차', '세트', false, false),
   ('삼다연 오리지널 밀크티', '오설록 대표 밀크티', '제주의 차향을 가장 편하게 담은 밀크티예요', 9500, '홍차/발효차', '찬물스틱티백', false, false),
   ('제주말차 오트블렌드', '오트밀크와 어우러진 말차', '제주 말차에 고소한 오트밀크를 더했어요', 9500, '녹차/말차/호지차', '찬물스틱티백', false, false),
-  ('가루녹차', '우유에 타 먹는 가루 녹차', '제주 다원의 찻잎을 곱게 갈았어요', 11000, '녹차/말차/호지차', '가루차', false, true),
-  ('프리미엄말차 밀크용', '밀크티 전용 말차', '진한 풍미를 위해 엄선한 제주 말차예요', 15000, '녹차/말차/호지차', '가루차', false, true),
-  ('마스터즈말차 밀크용', '최상급 밀크티 전용 말차', '제주 다원 최상급 찻잎으로 만들었어요', 20000, '녹차/말차/호지차', '가루차', false, false);
+  ('가루녹차', '우유에 타 먹는 가루 녹차', '제주 다원의 찻잎을 곱게 갈았어요', 11000, '녹차/말차/호지차', '가루차', false, true);
 
 -- 콜드류 (13종, 음료형 - 가볍고 시원한)
 insert into public.products (name, description, heritage_copy, price, base, format, is_caffeine_free, is_organic) values
@@ -177,22 +175,22 @@ insert into public.tags (category, name) values
 
 insert into public.products (name, description, heritage_copy, price, base, format, is_caffeine_free, is_organic) values
   ('제주순수녹차', null, null, 11000, '녹차/말차/호지차', '종이티백', false, false),
-  ('세작40g', null, null, 0, '녹차/말차/호지차', '잎차', false, false),
+  ('세작40g', null, null, 17000, '녹차/말차/호지차', '잎차', false, false),
   ('세작20입', null, null, 27000, '녹차/말차/호지차', '피라미드티백', false, false),
   ('제주호지차', null, null, 11000, '녹차/말차/호지차', '종이티백', false, false),
-  ('찬물녹차', null, null, 0, '녹차/말차/호지차', '찬물스틱티백', false, false),
-  ('세작80g', null, null, 0, '녹차/말차/호지차', '잎차', false, false),
-  ('우전 60g', null, null, 0, '녹차/말차/호지차', '잎차', false, false),
+  ('찬물녹차', null, null, 9500, '녹차/말차/호지차', '찬물스틱티백', false, false),
+  ('세작80g', null, null, 15000, '녹차/말차/호지차', '잎차', false, false),
+  ('우전 60g', null, null, 15000, '녹차/말차/호지차', '잎차', false, false),
   ('세작10입', null, null, 16500, '녹차/말차/호지차', '피라미드티백', false, false),
   ('프리미엄말차', null, null, 0, '녹차/말차/호지차', '가루차', false, false),
-  ('말차 콜드브루티', null, null, 0, '녹차/말차/호지차', '찬물스틱티백', false, false),
+  ('말차 콜드브루티', null, null, 14000, '녹차/말차/호지차', '찬물스틱티백', false, false),
   ('제주 화산우롱차', null, null, 11000, '홍차/발효차', '종이티백', false, false),
-  ('삼다연 80g', null, null, 0, '홍차/발효차', '잎차', false, false),
-  ('청우롱 50g', null, null, 0, '홍차/발효차', '잎차', false, false),
+  ('삼다연 80g', null, null, 15000, '홍차/발효차', '잎차', false, false),
+  ('청우롱 50g', null, null, 15000, '홍차/발효차', '잎차', false, false),
   ('제주숲홍차 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
-  ('홍우전 60g', null, null, 0, '홍차/발효차', '잎차', false, false),
-  ('루이보스퓨어', null, null, 0, '허브', '피라미드티백', true, false),
-  ('찬물루이보스티', null, null, 0, '허브', '찬물스틱티백', true, false),
+  ('홍우전 60g', null, null, 15000, '홍차/발효차', '잎차', false, false),
+  ('루이보스퓨어', null, null, 16500, '허브', '피라미드티백', true, false),
+  ('찬물루이보스티', null, null, 9500, '허브', '찬물스틱티백', true, false),
   ('삼다꿀배티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
   ('제주 삼다 영귤티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
   ('마롱 글라세 블랙티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
@@ -201,16 +199,16 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('유자 얼그레이', null, null, 11000, '홍차/발효차', '종이티백', false, false),
   ('캐모마일 블렌드 10입', null, null, 16500, '허브', '피라미드티백', true, false),
   ('밀키 우롱티 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
-  ('달빛 걷기 35g', null, null, 0, '홍차/발효차', '잎차', false, false),
+  ('달빛 걷기 35g', null, null, 15000, '홍차/발효차', '잎차', false, false),
   ('귤꽃향을 품은 우잣담 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
   ('베리 바닐라 그린티', null, null, 11000, '녹차/말차/호지차', '종이티백', false, false),
-  ('스윗 히비스커스 콜드브루 티', null, null, 0, '허브', '찬물스틱티백', true, false),
+  ('스윗 히비스커스 콜드브루 티', null, null, 14000, '허브', '찬물스틱티백', true, false),
   ('캐모마일 로지피치 10입', null, null, 16500, '허브', '피라미드티백', true, false),
   ('귤꽃향 블라썸 티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
   ('히비스커스 선샤인 10입', null, null, 16500, '허브', '피라미드티백', true, false),
-  ('삼다연 제주영귤 30g', null, null, 0, '홍차/발효차', '잎차', false, false),
+  ('삼다연 제주영귤 30g', null, null, 15000, '홍차/발효차', '잎차', false, false),
   ('피치 블랙티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
-  ('달빛 꿀배 콜드브루 티', null, null, 0, '홍차/발효차', '찬물스틱티백', false, false),
+  ('달빛 꿀배 콜드브루 티', null, null, 14000, '홍차/발효차', '찬물스틱티백', false, false),
   ('바닐라 허니 블랙티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
   ('달빛걷기 3입', null, null, 5500, '홍차/발효차', '피라미드티백', false, false),
   ('피차 파파야 블랙티 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
@@ -224,7 +222,7 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('무화과 애플 블랙티 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
   ('무화과 애플 블랙티 20입', null, null, 27000, '홍차/발효차', '피라미드티백', false, false),
   ('무화과 쇼콜라 블랙티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
-  ('마롱 크림 블랙티', null, null, 0, '홍차/발효차', '피라미드티백', false, false),
+  ('마롱 크림 블랙티 20입', null, null, 27000, '홍차/발효차', '피라미드티백', false, false),
   ('캐모마일 블렌드 3입', null, null, 5500, '허브', '피라미드티백', true, false),
   ('귤꽃향을 품은 우잣담 20입', null, null, 27000, '홍차/발효차', '피라미드티백', false, false),
   ('동백이 피는 곶자왈 3입', null, null, 5500, '홍차/발효차', '피라미드티백', false, false),
@@ -234,7 +232,8 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('루이보스 체리벨벳 10입', null, null, 16500, '허브', '피라미드티백', true, false),
   ('루이보스 문라이트 3입', null, null, 5500, '허브', '피라미드티백', true, false),
   ('스윗 허니 블랙티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
-  ('시그니처 얼그레이', null, null, 0, '홍차/발효차', '피라미드티백', false, false),
+  ('시그니처 얼그레이 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
+  ('시그니처 얼그레이 20입', null, null, 27000, '홍차/발효차', '피라미드티백', false, false),
   ('웨딩그린티 20입', null, null, 27000, '녹차/말차/호지차', '피라미드티백', false, false),
   ('제주말차밀크티', null, null, 0, '녹차/말차/호지차', '찬물스틱티백', false, false),
   ('제주 호지샷블렌드', null, null, 0, '녹차/말차/호지차', '찬물스틱티백', false, false),
@@ -243,8 +242,8 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('말차플러스 프로바이오틱스', null, null, 0, '녹차/말차/호지차', '가루차', false, false),
   ('말차플러스 테아닌', null, null, 0, '녹차/말차/호지차', '가루차', false, false),
   ('말차플러스 콜라겐', null, null, 0, '녹차/말차/호지차', '가루차', false, false),
-  ('선샤인 머스캣 콜드브루', null, null, 0, '녹차/말차/호지차', '찬물스틱티백', false, false),
-  ('선셋피치 콜드브루 티', null, null, 0, '홍차/발효차', '찬물스틱티백', false, false),
+  ('선샤인 머스캣 콜드브루', null, null, 14000, '녹차/말차/호지차', '찬물스틱티백', false, false),
+  ('선셋피치 콜드브루 티', null, null, 14000, '홍차/발효차', '찬물스틱티백', false, false),
   ('콤부차 애플파인', null, null, 0, '허브', '가루차', false, false),
   ('콤부차 리치피치', null, null, 0, '허브', '가루차', false, false),
   ('콤부차 깔라망고', null, null, 0, '허브', '가루차', false, false);
@@ -293,7 +292,7 @@ where
    or   (p.name = '무화과 애플 블랙티 20입' and t.name = '사과')
    or   (p.name = '무화과 쇼콜라 블랙티' and t.name = '무화과')
    or   (p.name = '무화과 쇼콜라 블랙티' and t.name = '초콜릿')
-   or   (p.name = '마롱 크림 블랙티' and t.name = '밤')
+   or   (p.name = '마롱 크림 블랙티 20입' and t.name = '밤')
    or   (p.name = '캐모마일 블렌드 3입' and t.name = '캐모마일')
    or   (p.name = '캐모마일 블렌드 3입' and t.name = '사과')
    or   (p.name = '귤꽃향을 품은 우잣담 20입' and t.name = '귤꽃')
@@ -306,8 +305,10 @@ where
    or   (p.name = '루이보스 체리벨벳 10입' and t.name = '체리')
    or   (p.name = '루이보스 문라이트 3입' and t.name = '배')
    or   (p.name = '스윗 허니 블랙티' and t.name = '꿀')
-   or   (p.name = '시그니처 얼그레이' and t.name = '유자')
-   or   (p.name = '시그니처 얼그레이' and t.name = '베르가못')
+   or   (p.name = '시그니처 얼그레이 10입' and t.name = '유자')
+   or   (p.name = '시그니처 얼그레이 10입' and t.name = '베르가못')
+   or   (p.name = '시그니처 얼그레이 20입' and t.name = '유자')
+   or   (p.name = '시그니처 얼그레이 20입' and t.name = '베르가못')
    or   (p.name = '웨딩그린티 20입' and t.name = '머스캣')
    or   (p.name = '말차플러스 프로바이오틱스' and t.name = '사과')
    or   (p.name = '말차플러스 프로바이오틱스' and t.name = '크랜베리')
