@@ -76,6 +76,8 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('밀키 우롱티 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
   ('바닐라 허니 블랙티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
   ('바질 보타닉 가든 10입', null, null, 16500, '허브', '피라미드티백', true, false),
+  ('벚꽃향 가득한 올레 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
+  ('벚꽃향 가득한 올레 20입', null, null, 27000, '홍차/발효차', '피라미드티백', false, false),
   ('벚꽃향 가득한 올레 3입', null, null, 5500, '홍차/발효차', '피라미드티백', false, false),
   ('베리 바닐라 그린티', null, null, 11000, '녹차/말차/호지차', '종이티백', false, false),
   ('삼다꿀배티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
@@ -267,4 +269,10 @@ where
    or   (p.name = '콤부차 리치피치' and t.name = '리치')
    or   (p.name = '콤부차 리치피치' and t.name = '복숭아')
    or   (p.name = '콤부차 깔라망고' and t.name = '깔라만시')
-   or   (p.name = '콤부차 깔라망고' and t.name = '망고');
+   or   (p.name = '콤부차 깔라망고' and t.name = '망고')
+   or   (p.name = '벚꽃향 가득한 올레 10입' and t.name = '체리')
+   or   (p.name = '벚꽃향 가득한 올레 10입' and t.name = '벚꽃')
+   or   (p.name = '벚꽃향 가득한 올레 10입' and t.name = '플로럴')
+   or   (p.name = '벚꽃향 가득한 올레 20입' and t.name = '체리')
+   or   (p.name = '벚꽃향 가득한 올레 20입' and t.name = '벚꽃')
+   or   (p.name = '벚꽃향 가득한 올레 20입' and t.name = '플로럴');
