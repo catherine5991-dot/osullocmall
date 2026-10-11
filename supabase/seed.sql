@@ -95,6 +95,7 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('삼다연 제주영귤 30g', NULL, NULL, 15000, '홍차/발효차', '잎차', false),
   ('벚꽃향 가득한 올레 3입', NULL, NULL, 5500, '홍차/발효차', '피라미드티백', false),
   ('말차플러스 콜라겐', NULL, NULL, 12000, '녹차/말차/호지차', '가루차', false),
+  ('베리 가든 그린티 10입', '싱그러운 베리향 그린티', '제주 녹차에 상큼한 베리향을 더했어요', 16500, '녹차/말차/호지차', '피라미드티백', false),
   ('피치 파파야 블랙티 10입', NULL, NULL, 16500, '홍차/발효차', '피라미드티백', false),
   ('삼다연 제주영귤 3입', NULL, NULL, 5500, '홍차/발효차', '피라미드티백', false),
   ('제주숲홍차 10입', NULL, NULL, 16500, '홍차/발효차', '피라미드티백', false),
@@ -131,6 +132,7 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('제주 화산우롱차', NULL, NULL, 11000, '홍차/발효차', '종이티백', false),
   ('삼다꿀배티', NULL, NULL, 11000, '홍차/발효차', '종이티백', false),
   ('체리 루이보스', '상큼달콤한 체리향 루이보스', '루이보스에 체리향을 더한 무카페인 허브티예요', 11000, '허브', '종이티백', true),
+  ('베리 가든 그린티 20입', '싱그러운 베리향 그린티', '제주 녹차에 상큼한 베리향을 더했어요', 27000, '녹차/말차/호지차', '피라미드티백', false),
   ('마스터즈 말차', '더 진하고 깊은 말차 애호가용', '제주 차밭의 햇볕을 가장 오래 머금은 잎으로 만들었어요', 50000, '녹차/말차/호지차', '가루차', false),
   ('바질 보타닉 가든 10입', NULL, NULL, 16500, '허브', '피라미드티백', true),
   ('무화과 쇼콜라 블랙티', NULL, NULL, 11000, '홍차/발효차', '종이티백', false),
@@ -284,4 +286,6 @@ select p.id, t.id from public.products p, public.tags t where
   or  (p.name = '무화과 쇼콜라 블랙티' and t.name = '너티' and t.category = 'flavor_aroma')
   or  (p.name = '콤부차 깔라망고' and t.name = '시트러스' and t.category = 'flavor_aroma')
   or  (p.name = '체리 루이보스' and t.name = '체리' and t.category = 'raw_material')
-  or  (p.name = '체리 루이보스' and t.name = '프루티' and t.category = 'flavor_aroma');
+  or  (p.name = '체리 루이보스' and t.name = '프루티' and t.category = 'flavor_aroma')
+  or  (p.name = '베리 가든 그린티 10입' and t.name = '프루티' and t.category = 'flavor_aroma')
+  or  (p.name = '베리 가든 그린티 20입' and t.name = '프루티' and t.category = 'flavor_aroma');
