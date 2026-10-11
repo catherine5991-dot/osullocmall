@@ -152,14 +152,25 @@ function ProductList() {
 
   return (
     <div className="px-6 pt-8">
-      <h1 className="text-xl font-semibold">전체 상품</h1>
+      <div className="flex items-baseline gap-2">
+        <button
+          type="button"
+          onClick={() => {
+            setActiveBase(null)
+            setFilters(emptyFilters())
+          }}
+          className="text-xl font-semibold"
+        >
+          전체 상품
+        </button>
+        {status === 'ready' && (
+          <span className="text-sm text-gray-600">총 {filtered.length}개 상품</span>
+        )}
+      </div>
 
       {status === 'loading' && <p className="mt-4 text-sm text-gray-500">불러오는 중...</p>}
       {status === 'error' && (
         <p className="mt-4 text-sm text-red-600">상품을 불러오지 못했어요. Supabase 연결을 확인해주세요.</p>
-      )}
-      {status === 'ready' && (
-        <p className="mt-2 text-sm text-gray-600">총 {filtered.length}개 상품</p>
       )}
 
       <div className="mt-5 flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
