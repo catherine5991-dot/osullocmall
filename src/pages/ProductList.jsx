@@ -39,26 +39,7 @@ function FilterIcon() {
   )
 }
 
-function GridIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="3" y="3" width="8" height="8" rx="1" fill="currentColor" />
-      <rect x="13" y="3" width="8" height="8" rx="1" fill="currentColor" />
-      <rect x="3" y="13" width="8" height="8" rx="1" fill="currentColor" />
-      <rect x="13" y="13" width="8" height="8" rx="1" fill="currentColor" />
-    </svg>
-  )
-}
-
-function ListIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="3" y="3" width="18" height="18" rx="1" fill="currentColor" />
-    </svg>
-  )
-}
-
-function ProductCard({ product: p, layout }) {
+function ProductCard({ product: p }) {
   const thumbColor = THUMB_COLORS[p.base] ?? 'bg-gray-100'
   const aromaTags = (p.product_tags ?? [])
     .map((pt) => pt.tags)
@@ -67,8 +48,8 @@ function ProductCard({ product: p, layout }) {
   const displayBase = getDisplayBase(p)
 
   return (
-    <Link to={`/products/${p.id}`} className={layout === 'list' ? 'flex gap-3 text-left' : 'block text-left'}>
-      <div className={`relative aspect-square ${layout === 'list' ? 'w-28 shrink-0' : 'w-full'} rounded-[2px] ${thumbColor}`}>
+    <Link to={`/products/${p.id}`} className="block text-left">
+      <div className={`relative aspect-square w-full rounded-[2px] ${thumbColor}`}>
         <button
           type="button"
           aria-label="찜하기"
@@ -101,7 +82,6 @@ function ProductList() {
   const [products, setProducts] = useState([])
   const [status, setStatus] = useState('loading')
   const [activeBase, setActiveBase] = useState(null)
-  const [layout, setLayout] = useState('grid')
   const [filterOpen, setFilterOpen] = useState(false)
   const [filters, setFilters] = useState(emptyFilters())
   const [tags, setTags] = useState({ flavor_aroma: [], raw_material: [], situation: [] })
@@ -214,40 +194,22 @@ function ProductList() {
           <FilterIcon />
           필터
         </button>
-        <div className="flex items-center gap-3 text-gray-700">
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            aria-label="정렬"
-            className="rounded-[2px] border border-gray-200 bg-white py-1 pl-2 pr-6 text-xs text-gray-700"
-          >
-            <option value="popular">인기순</option>
-            <option value="newest">신제품순</option>
-            <option value="price_asc">낮은가격순</option>
-            <option value="price_desc">높은가격순</option>
-          </select>
-          <button
-            type="button"
-            aria-label="격자형 보기"
-            onClick={() => setLayout('grid')}
-            className={layout === 'grid' ? 'text-black' : 'text-gray-300'}
-          >
-            <GridIcon />
-          </button>
-          <button
-            type="button"
-            aria-label="목록형 보기"
-            onClick={() => setLayout('list')}
-            className={layout === 'list' ? 'text-black' : 'text-gray-300'}
-          >
-            <ListIcon />
-          </button>
-        </div>
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          aria-label="정렬"
+          className="rounded-[2px] border border-gray-200 bg-white py-1 pl-2 pr-6 text-xs text-gray-700"
+        >
+          <option value="popular">인기순</option>
+          <option value="newest">신제품순</option>
+          <option value="price_asc">낮은가격순</option>
+          <option value="price_desc">높은가격순</option>
+        </select>
       </div>
 
-      <div className={layout === 'grid' ? 'mt-5 grid grid-cols-2 gap-x-3 gap-y-6' : 'mt-5 flex flex-col gap-4'}>
+      <div className="mt-5 grid grid-cols-2 gap-x-3 gap-y-6">
         {sortedFiltered.map((p) => (
-          <ProductCard key={p.id} product={p} layout={layout} />
+          <ProductCard key={p.id} product={p} />
         ))}
       </div>
 
