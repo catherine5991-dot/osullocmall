@@ -380,7 +380,9 @@ function productMatchesFlavor(product, flavor, sub) {
   if (flavor === 'blended_tea') return hasAromaTag(product, sub)
   if (flavor === 'drink_type') {
     if (sub === 'milk_style') return MILK_NAMES.includes(product.name)
-    if (sub === 'cold_style') return COLD_NAMES.includes(product.name)
+    if (sub === 'cold_style') {
+      return product.format === '찬물스틱티백' && (hasAromaTag(product, 'citrus') || hasAromaTag(product, 'fruity'))
+    }
   }
   if (flavor === 'blended_herb') {
     if (sub === 'fruity_herb') return FRUITY_HERB_NAMES.includes(product.name)
