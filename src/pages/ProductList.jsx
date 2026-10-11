@@ -24,11 +24,9 @@ function hasFlavorAromaTag(p) {
   return (p.product_tags ?? []).some((pt) => pt.tags?.category === 'flavor_aroma')
 }
 
-// 녹차/말차/호지차 베이스 중, 밀크티·콤부차&콜드브루티·블렌디드티로 이미 분류되지 않은 "순수차"만 이름으로 세분화
+// 녹차/말차/호지차 베이스를 이름으로 세분화 (다른 필터와 겹쳐도 됨 — 한 상품이 여러 태그에 같이 보일 수 있음)
 function isPureGMH(p, kind) {
   if (p.base !== '녹차/말차/호지차') return false
-  if (MILK_NAMES.includes(p.name) || COLD_KOMBUCHA_NAMES.includes(p.name)) return false
-  if (hasFlavorAromaTag(p)) return false
   if (kind === 'matcha') return p.name.includes('말차')
   if (kind === 'hoji') return p.name.includes('호지')
   return !p.name.includes('말차') && !p.name.includes('호지')
@@ -120,7 +118,8 @@ function ProductCard({ product: p, layout }) {
       <div className="mt-2">
         <p className="text-sm font-semibold">{p.name}</p>
         <p className="mt-1 text-xs text-gray-500">
-          {aromaTags.length > 0 ? '블렌디드티' : `${p.base} | ${p.format}`}
+          {p.base} | {p.format}
+          {aromaTags.length > 0 ? ' · 블렌디드티' : ''}
         </p>
         <p className="mt-1 text-sm font-semibold">{p.price.toLocaleString()}원</p>
       </div>
