@@ -381,6 +381,7 @@ function productMatchesFlavor(product, flavor, sub) {
   if (flavor === 'drink_type') {
     if (sub === 'milk_style') return MILK_NAMES.includes(product.name)
     if (sub === 'cold_style') {
+      if (product.name.startsWith('콤부차') || product.name.startsWith('말차플러스')) return true
       return product.format === '찬물스틱티백' && (hasAromaTag(product, 'citrus') || hasAromaTag(product, 'fruity'))
     }
   }
