@@ -24,12 +24,16 @@ function hasFlavorAromaTag(p) {
   return (p.product_tags ?? []).some((pt) => pt.tags?.category === 'flavor_aroma')
 }
 
+// 이름에 "말차"가 없어도 실질적으로 말차류인 상품 (가루녹차 = 말차 가루)
+const MATCHA_OVERRIDE_NAMES = ['가루녹차']
+
 // 녹차/말차/호지차 베이스를 이름으로 세분화 (다른 필터와 겹쳐도 됨 — 한 상품이 여러 태그에 같이 보일 수 있음)
 function isPureGMH(p, kind) {
   if (p.base !== '녹차/말차/호지차') return false
-  if (kind === 'matcha') return p.name.includes('말차')
+  const isMatcha = p.name.includes('말차') || MATCHA_OVERRIDE_NAMES.includes(p.name)
+  if (kind === 'matcha') return isMatcha
   if (kind === 'hoji') return p.name.includes('호지')
-  return !p.name.includes('말차') && !p.name.includes('호지')
+  return !isMatcha && !p.name.includes('호지')
 }
 
 const BASE_FILTERS = [
@@ -95,6 +99,7 @@ function ProductCard({ product: p, layout }) {
     .map((pt) => pt.tags)
     .filter((t) => t?.category === 'flavor_aroma')
     .map((t) => t.name)
+  const displayBase = MATCHA_OVERRIDE_NAMES.includes(p.name) ? '말차' : p.base
 
   return (
     <Link to={`/products/${p.id}`} className={layout === 'list' ? 'flex gap-3 text-left' : 'block text-left'}>
@@ -118,7 +123,7 @@ function ProductCard({ product: p, layout }) {
       <div className="mt-2">
         <p className="text-sm font-semibold">{p.name}</p>
         <p className="mt-1 text-xs text-gray-500">
-          {p.base} | {p.format}
+          {displayBase} | {p.format}
           {aromaTags.length > 0 ? ' · 블렌디드티' : ''}
         </p>
         <p className="mt-1 text-sm font-semibold">{p.price.toLocaleString()}원</p>

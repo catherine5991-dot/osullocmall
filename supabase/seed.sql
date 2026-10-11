@@ -219,4 +219,7 @@ where
    or   (p.name = '시그니처 얼그레이 20입' and t.name = '유자')
    or   (p.name = '시그니처 얼그레이 20입' and t.name = '베르가못')
    or   (p.name = '웨딩그린티 20입' and t.name = '프루티')
-   or   (p.name = '허니 살구향 그린티' and t.name = '프루티');
+   or   (p.name = '허니 살구향 그린티' and t.name = '프루티')
+   or   (p.name = '귤꽃향 블라썸 티' and t.name = '플로럴')
+   or   (p.name = '귤꽃향을 품은 우잣담 10입' and t.name = '플로럴')
+   or   (p.name = '귤꽃향을 품은 우잣담 20입' and t.name = '플로럴');
