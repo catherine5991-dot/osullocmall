@@ -257,7 +257,6 @@ where
    or   (p.name = '마롱 글라세 블랙티' and t.name = '너티')
    or   (p.name = '마롱 크림 블랙티 10입' and t.name = '너티')
    or   (p.name = '마롱 크림 블랙티 20입' and t.name = '너티')
-   or   (p.name = '밀키 우롱티 10입' and t.name = '너티')
    or   (p.name = '바닐라 허니 블랙티' and t.name = '허벌')
    or   (p.name = '스윗 허니 블랙티' and t.name = '허벌')
    or   (p.name = '루이보스 문라이트 3입' and t.name = '프루티')
@@ -282,4 +281,5 @@ where
    or   (p.name = '피치 파파야 블랙티 20입' and t.name = '파파야')
    or   (p.name = '피치 파파야 블랙티 20입' and t.name = '프루티')
    or   (p.name = '웨딩그린티 10입' and t.name = '머스캣')
-   or   (p.name = '웨딩그린티 10입' and t.name = '프루티');
+   or   (p.name = '웨딩그린티 10입' and t.name = '프루티')
+   or   (p.name = '무화과 쇼콜라 블랙티' and t.name = '너티');
