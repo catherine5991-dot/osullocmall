@@ -65,7 +65,7 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('마롱 크림 블랙티 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
   ('마롱 크림 블랙티 20입', null, null, 27000, '홍차/발효차', '피라미드티백', false, false),
   ('마스터즈 말차', '더 진하고 깊은 말차 애호가용', '제주 차밭의 햇볕을 가장 오래 머금은 잎으로 만들었어요', 50000, '녹차/말차/호지차', '가루차', false, false),
-  ('말차 콜드브루티', null, null, 14000, '녹차/말차/호지차', '찬물스틱티백', false, false),
+  ('말차 콜드브루 티', null, null, 14000, '녹차/말차/호지차', '찬물스틱티백', false, false),
   ('말차플러스 콜라겐', null, null, 12000, '녹차/말차/호지차', '가루차', false, false),
   ('말차플러스 테아닌', null, null, 12000, '녹차/말차/호지차', '가루차', false, false),
   ('말차플러스 프로바이오틱스', null, null, 12000, '녹차/말차/호지차', '가루차', false, false),
@@ -83,7 +83,7 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('삼다연 오리지널 밀크티', '오설록 대표 밀크티', '제주의 차향을 가장 편하게 담은 밀크티예요', 9500, '홍차/발효차', '가루차', false, false),
   ('삼다연 제주영귤 30g', null, null, 15000, '홍차/발효차', '잎차', false, false),
   ('삼다연 제주영귤 3입', null, null, 5500, '홍차/발효차', '피라미드티백', false, false),
-  ('선샤인 머스캣 콜드브루', null, null, 14000, '녹차/말차/호지차', '찬물스틱티백', false, false),
+  ('선샤인 머스캣 콜드브루 티', null, null, 14000, '녹차/말차/호지차', '찬물스틱티백', false, false),
   ('선셋피치 콜드브루 티', null, null, 14000, '홍차/발효차', '찬물스틱티백', false, false),
   ('세작 10입', null, null, 16500, '녹차/말차/호지차', '피라미드티백', false, false),
   ('세작 20입', null, null, 27000, '녹차/말차/호지차', '피라미드티백', false, false),
@@ -100,16 +100,16 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('유자 얼그레이', null, null, 11000, '홍차/발효차', '종이티백', false, false),
   ('일로향 60g', null, null, 170000, '녹차/말차/호지차', '잎차', false, false),
   ('제주 동백꽃 티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
-  ('제주 말차샷블렌드', null, null, 13000, '녹차/말차/호지차', '가루차', false, false),
+  ('제주 말차 밀크티', '진한 말차와 부드러운 우유의 조화', '제주 다원의 말차를 우유에 듬뿍 녹였어요', 13000, '녹차/말차/호지차', '가루차', false, false),
+  ('제주 말차 오트 블렌드', '오트밀크와 어우러진 말차', '제주 말차에 고소한 오트밀크를 더했어요', 9500, '녹차/말차/호지차', '가루차', false, false),
+  ('제주 말차샷 블렌드', null, null, 13000, '녹차/말차/호지차', '가루차', false, false),
   ('제주 삼다 영귤티', null, null, 11000, '홍차/발효차', '종이티백', false, false),
   ('제주 순수 녹차', '산뜻하고 가벼운 풍미의 녹차', '제주 화산토 다원에서 자란 찻잎을 그대로 덖어 만들었어요', 12000, '녹차/말차/호지차', '잎차', false, true),
-  ('제주 호지샷블렌드', null, null, 13000, '녹차/말차/호지차', '가루차', false, false),
+  ('제주 순수 녹차', null, null, 11000, '녹차/말차/호지차', '종이티백', false, false),
+  ('제주 호지샷 블렌드', null, null, 13000, '녹차/말차/호지차', '가루차', false, false),
+  ('제주 호지차 밀크티', '구수한 호지차 밀크티', '제주에서 볶아낸 호지차를 우유와 함께 담았어요', 13000, '녹차/말차/호지차', '가루차', false, false),
   ('제주 화산우롱차', null, null, 11000, '홍차/발효차', '종이티백', false, false),
-  ('제주말차 밀크티', '진한 말차와 부드러운 우유의 조화', '제주 다원의 말차를 우유에 듬뿍 녹였어요', 13000, '녹차/말차/호지차', '가루차', false, false),
-  ('제주말차 오트블렌드', '오트밀크와 어우러진 말차', '제주 말차에 고소한 오트밀크를 더했어요', 9500, '녹차/말차/호지차', '가루차', false, false),
-  ('제주순수녹차', null, null, 11000, '녹차/말차/호지차', '종이티백', false, false),
   ('제주숲홍차 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
-  ('제주호지차 밀크티', '구수한 호지차 밀크티', '제주에서 볶아낸 호지차를 우유와 함께 담았어요', 13000, '녹차/말차/호지차', '가루차', false, false),
   ('제주화산암차 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
   ('찬물 루이보스티', '찬물에 바로 즐기는 루이보스', '언제 어디서든 편안하게 즐겨보세요', 11000, '허브', '찬물스틱티백', true, true),
   ('찬물녹차', null, null, 9500, '녹차/말차/호지차', '찬물스틱티백', false, false),
@@ -146,7 +146,7 @@ where
    or   (p.name = '멜로우 민트' and t.name = '민트')
    or   (p.name = '제주 순수 녹차' and t.name = '아침을 깨워주는')
    or   (p.name = '프리미엄 말차' and t.name = '아침을 깨워주는')
-   or   (p.name = '제주말차 밀크티' and t.name = '디저트와 함께')
+   or   (p.name = '제주 말차 밀크티' and t.name = '디저트와 함께')
    or   (p.name = '스윗 히비스커스' and t.name = '디저트와 함께')
    or   (p.name = '피치 캐모마일' and t.name = '피곤할 때')
    or   (p.name = '멜로우 민트' and t.name = '피곤할 때')
@@ -212,9 +212,11 @@ where
    or   (p.name = '말차플러스 테아닌' and t.name = '레몬')
    or   (p.name = '말차플러스 콜라겐' and t.name = '딸기')
    or   (p.name = '말차플러스 콜라겐' and t.name = '복숭아')
-   or   (p.name = '선샤인 머스캣 콜드브루' and t.name = '머스캣')
+   or   (p.name = '선샤인 머스캣 콜드브루 티' and t.name = '머스캣')
    or   (p.name = '선셋피치 콜드브루 티' and t.name = '복숭아')
    or   (p.name = '콤부차 애플파인' and t.name = '사과')
    or   (p.name = '콤부차 애플파인' and t.name = '파인애플')
    or   (p.name = '시그니처 얼그레이 20입' and t.name = '유자')
-   or   (p.name = '시그니처 얼그레이 20입' and t.name = '베르가못');
+   or   (p.name = '시그니처 얼그레이 20입' and t.name = '베르가못')
+   or   (p.name = '웨딩그린티 20입' and t.name = '프루티')
+   or   (p.name = '허니 살구향 그린티' and t.name = '프루티');

@@ -98,7 +98,7 @@ function ProductCard({ product: p, layout }) {
       <div className="mt-2">
         <p className="text-sm font-semibold">{p.name}</p>
         <p className="mt-1 text-xs text-gray-500">
-          {aromaTags.length > 0 ? aromaTags.join(' | ') : `${p.base} | ${p.format}`}
+          {aromaTags.length > 0 ? '블렌디드티' : `${p.base} | ${p.format}`}
         </p>
         <p className="mt-1 text-sm font-semibold">{p.price.toLocaleString()}원</p>
       </div>
