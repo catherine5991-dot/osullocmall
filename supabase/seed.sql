@@ -25,6 +25,7 @@ insert into public.tags (name, category) values
   ('딸기', 'raw_material'),
   ('귤', 'raw_material'),
   ('장미', 'raw_material'),
+  ('스윗', 'flavor_aroma'),
   ('운동 후 상쾌하게', 'situation'),
   ('초콜릿', 'raw_material'),
   ('살구', 'raw_material'),

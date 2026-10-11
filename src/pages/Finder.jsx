@@ -11,6 +11,7 @@ import blendedFloralImg from '../assets/option-blended-floral.png'
 import blendedFruityImg from '../assets/option-blended-fruity.jpg'
 import blendedHerbalImg from '../assets/option-blended-herbal.png'
 import blendedNuttyImg from '../assets/option-blended-nutty.png'
+import blendedSweetImg from '../assets/option-blended-sweet.png'
 import drinkColdImg from '../assets/option-drink-cold.jpg'
 import drinkMilkImg from '../assets/option-drink-milk.jpg'
 import herbFloralImg from '../assets/option-herb-floral.png'
@@ -61,6 +62,11 @@ const CATEGORY_LABELS = {
     name: '허벌',
     desc: '은은하고 편안한 향의 차',
     banner: '은은한 Herbal 향과 편안한 풍미의 블렌디드티',
+  },
+  sweet: {
+    name: '스윗',
+    desc: '달콤하고 부드러운 향의 차',
+    banner: '달콤하고 부드러운 Sweet 향이 어우러진 블렌디드티',
   },
   milk_style: { name: '밀크티', desc: '우유와 함께 즐기는 차' },
   cold_style: { name: '콜드', desc: '가볍고 시원하게 즐기는 차' },
@@ -138,6 +144,7 @@ const BLENDED_TEA_SUBQUESTION = {
     { label: '구수하고 고소한 맛과 향이 좋아요', enLabel: 'Nutty', value: 'nutty', image: blendedNuttyImg },
     { label: '달콤한 맛과 향이 좋아요', enLabel: 'Fruity', value: 'fruity', image: blendedFruityImg },
     { label: '은은하고 편안한 맛과 향이 좋아요', enLabel: 'Herbal', value: 'herbal', image: blendedHerbalImg },
+    { label: '달콤하고 부드러운 맛과 향이 좋아요', enLabel: 'Sweet', value: 'sweet', image: blendedSweetImg },
   ],
 }
 
@@ -197,7 +204,7 @@ const MATCHA_PLUS_NAMES = ['말차플러스 프로바이오틱스', '말차플�
 const PURE_HERB_NAMES = ['루이보스 퓨어 10입', '찬물 루이보스티']
 const KOMBUCHA_NAMES = ['콤부차 애플파인', '콤부차 리치피치', '콤부차 깔라망고']
 
-const AROMA_TAG_NAME = { citrus: '시트러스', floral: '플로럴', nutty: '너티', fruity: '프루티', herbal: '허벌' }
+const AROMA_TAG_NAME = { citrus: '시트러스', floral: '플로럴', nutty: '너티', fruity: '프루티', herbal: '허벌', sweet: '스윗' }
 
 // 블렌디드 결과 화면의 세부 태그 버튼을 누르면 보여줄 상품명 목록 (시트러스: 영귤/유자, 플로럴: 동백 등)
 const DETAIL_TAG_NAMES = {
