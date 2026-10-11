@@ -13,7 +13,6 @@ const THUMB_COLORS = {
 // 상품의 베이스 분류로 필터 버튼 구성 (실제 DB 베이스 값 기준)
 // '블렌디드티'는 베이스 값이 아니라 맛과 향(flavor_aroma) 태그가 붙은 상품을 모아 보여주는 특수 필터
 const BASE_FILTERS = [
-  { label: '전체', value: null },
   { label: '녹차 · 말차 · 호지차', value: '녹차/말차/호지차' },
   { label: '홍차 · 발효차', value: '홍차/발효차' },
   { label: '블렌디드티', value: 'blended' },
@@ -170,7 +169,7 @@ function ProductList() {
             <button
               key={f.label}
               type="button"
-              onClick={() => setActiveBase(f.value)}
+              onClick={() => setActiveBase(selected ? null : f.value)}
               className={`shrink-0 rounded-full border px-4 py-2 text-sm transition-colors ${
                 selected ? 'border-primary bg-primary text-white' : 'border-gray-300 text-gray-700'
               }`}
