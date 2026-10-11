@@ -47,7 +47,7 @@ const CATEGORY_LABELS = {
   },
   floral: {
     name: '플로럴',
-    desc: '화사한 꽃향의 차',
+    desc: '은은한 Floral 향과 섬세한 풍미가 어우러진 블렌디드티',
     tags: ['동백', '귤꽃', '벚꽃', '캐모마일', '장미'],
   },
   nutty: { name: '너티', desc: '구수하고 고소한 향의 차' },
