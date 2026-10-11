@@ -16,9 +16,12 @@ const MILK_NAMES = [
   '삼다연 오리지널 밀크티', '제주 말차 오트 블렌드', '가루녹차',
 ]
 const COLD_KOMBUCHA_NAMES = [
-  '찬물녹차', '말차 콜드브루 티', '선샤인 머스캣 콜드브루 티', '선셋피치 콜드브루 티',
+  '찬물 녹차', '말차 콜드브루 티', '선샤인 머스캣 콜드브루 티', '선셋피치 콜드브루 티',
   '스윗 히비스커스 콜드브루 티', '달빛 꿀배 콜드브루 티', '콤부차 애플파인',
 ]
+
+// 이름에 '말차'가 있어도 함께 녹차로도 보여주고 싶은 예외 상품
+const GREEN_EXTRA_NAMES = ['말차 콜드브루 티']
 
 function hasFlavorAromaTag(p) {
   return (p.product_tags ?? []).some((pt) => pt.tags?.category === 'flavor_aroma')
@@ -39,7 +42,7 @@ function isPureGMH(p, kind) {
 }
 
 const BASE_FILTERS = [
-  { label: '녹차', test: (p) => isPureGMH(p, 'green') },
+  { label: '녹차', test: (p) => isPureGMH(p, 'green') || GREEN_EXTRA_NAMES.includes(p.name) },
   { label: '말차', test: (p) => isPureGMH(p, 'matcha') },
   { label: '호지차', test: (p) => isPureGMH(p, 'hoji') },
   { label: '홍차 · 발효차', test: (p) => p.base === '홍차/발효차' },
