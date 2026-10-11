@@ -105,12 +105,13 @@ function ProductList() {
   const [filterOpen, setFilterOpen] = useState(false)
   const [filters, setFilters] = useState(emptyFilters())
   const [tags, setTags] = useState({ flavor_aroma: [], raw_material: [], situation: [] })
+  const [sortBy, setSortBy] = useState('popular')
 
   useEffect(() => {
     supabase
       .from('products')
       .select(
-        'id, name, price, base, format, is_caffeine_free, is_organic, product_tags(tags(name, category))',
+        'id, name, price, base, format, is_caffeine_free, is_organic, created_at, product_tags(tags(name, category))',
       )
       .order('name')
       .then(({ data, error }) => {
@@ -144,6 +145,16 @@ function ProductList() {
   const filtered = products
     .filter((p) => matchesBaseFilter(p, activeBase))
     .filter((p) => matchesFilters(p, filters))
+
+  const sortedFiltered = [...filtered]
+  if (sortBy === 'newest') {
+    sortedFiltered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+  } else if (sortBy === 'price_asc') {
+    sortedFiltered.sort((a, b) => a.price - b.price)
+  } else if (sortBy === 'price_desc') {
+    sortedFiltered.sort((a, b) => b.price - a.price)
+  }
+  // 'popular'은 별도 인기 데이터가 없어 기본 노출 순서를 그대로 사용
 
   return (
     <div className="px-6 pt-8">
@@ -203,7 +214,18 @@ function ProductList() {
           <FilterIcon />
           필터
         </button>
-        <div className="flex items-center gap-2 text-gray-700">
+        <div className="flex items-center gap-3 text-gray-700">
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            aria-label="정렬"
+            className="rounded-[2px] border border-gray-200 bg-white py-1 pl-2 pr-6 text-xs text-gray-700"
+          >
+            <option value="popular">인기순</option>
+            <option value="newest">신제품순</option>
+            <option value="price_asc">낮은가격순</option>
+            <option value="price_desc">높은가격순</option>
+          </select>
           <button
             type="button"
             aria-label="격자형 보기"
@@ -224,7 +246,7 @@ function ProductList() {
       </div>
 
       <div className={layout === 'grid' ? 'mt-5 grid grid-cols-2 gap-x-3 gap-y-6' : 'mt-5 flex flex-col gap-4'}>
-        {filtered.map((p) => (
+        {sortedFiltered.map((p) => (
           <ProductCard key={p.id} product={p} layout={layout} />
         ))}
       </div>
