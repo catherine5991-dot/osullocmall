@@ -5,7 +5,7 @@ import CardCarousel from '../components/CardCarousel.jsx'
 import cartIcon from '../assets/icon-cart.png'
 import menuIcon from '../assets/icon-menu.png'
 import GnbDrawer from '../components/GnbDrawer.jsx'
-import { MILK_NAMES, getDisplayBase, hasFlavorAromaTag } from '../lib/productClassification.js'
+import { MATCHA_OVERRIDE_NAMES, MILK_NAMES, getDisplayBase, hasFlavorAromaTag } from '../lib/productClassification.js'
 import blendedCitrusImg from '../assets/option-blended-citrus.jpg'
 import blendedFloralImg from '../assets/option-blended-floral.png'
 import blendedFruityImg from '../assets/option-blended-fruity.jpg'
@@ -210,7 +210,7 @@ function isPureTeaType(product, sub) {
   if (sub === 'matcha') {
     return (
       product.base === '녹차/말차/호지차' &&
-      product.name.includes('말차') &&
+      (product.name.includes('말차') || MATCHA_OVERRIDE_NAMES.includes(product.name)) &&
       isPureFormat &&
       !MILK_NAMES.includes(product.name) &&
       !hasFlavorAromaTag(product)
