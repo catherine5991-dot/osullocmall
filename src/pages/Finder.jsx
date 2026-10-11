@@ -709,9 +709,7 @@ function Finder() {
           <ResultList
             matcher={
               bannerCategory?.tags && selectedTags.size < bannerCategory.tags.length
-                ? (p) =>
-                    screen.matcher(p) &&
-                    [...selectedTags].some((t) => CITRUS_TAG_NAMES[t]?.includes(p.name))
+                ? (p) => [...selectedTags].some((t) => CITRUS_TAG_NAMES[t]?.includes(p.name))
                 : screen.matcher
             }
             intro={screen.intro}
