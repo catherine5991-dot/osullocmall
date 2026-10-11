@@ -130,6 +130,7 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('제주 말차샷 블렌드', NULL, NULL, 13000, '녹차/말차/호지차', '가루차', false),
   ('제주 화산우롱차', NULL, NULL, 11000, '홍차/발효차', '종이티백', false),
   ('삼다꿀배티', NULL, NULL, 11000, '홍차/발효차', '종이티백', false),
+  ('체리 루이보스', '상큼달콤한 체리향 루이보스', '루이보스에 체리향을 더한 무카페인 허브티예요', 11000, '허브', '종이티백', true),
   ('마스터즈 말차', '더 진하고 깊은 말차 애호가용', '제주 차밭의 햇볕을 가장 오래 머금은 잎으로 만들었어요', 50000, '녹차/말차/호지차', '가루차', false),
   ('바질 보타닉 가든 10입', NULL, NULL, 16500, '허브', '피라미드티백', true),
   ('무화과 쇼콜라 블랙티', NULL, NULL, 11000, '홍차/발효차', '종이티백', false),
@@ -281,4 +282,6 @@ select p.id, t.id from public.products p, public.tags t where
   or  (p.name = '웨딩그린티 10입' and t.name = '머스캣' and t.category = 'raw_material')
   or  (p.name = '웨딩그린티 10입' and t.name = '프루티' and t.category = 'flavor_aroma')
   or  (p.name = '무화과 쇼콜라 블랙티' and t.name = '너티' and t.category = 'flavor_aroma')
-  or  (p.name = '콤부차 깔라망고' and t.name = '시트러스' and t.category = 'flavor_aroma');
+  or  (p.name = '콤부차 깔라망고' and t.name = '시트러스' and t.category = 'flavor_aroma')
+  or  (p.name = '체리 루이보스' and t.name = '체리' and t.category = 'raw_material')
+  or  (p.name = '체리 루이보스' and t.name = '프루티' and t.category = 'flavor_aroma');
