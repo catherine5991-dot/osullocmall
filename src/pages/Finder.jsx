@@ -42,7 +42,7 @@ const CATEGORY_LABELS = {
   citrus: {
     name: '시트러스',
     desc: '상큼한 향의 차',
-    banner: '싱그러운 시트러스 향과 산뜻한 풍미가 조화롭게 어우러진 블렌디드 티',
+    banner: '싱그러운 Citrus 향과 산뜻한 풍미가 어우러진 블렌디드 티',
     tags: ['영귤', '유자', '귤꽃', '레몬'],
   },
   floral: {
