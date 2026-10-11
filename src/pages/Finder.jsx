@@ -36,7 +36,7 @@ const CATEGORY_LABELS = {
   pure_herb: { name: '순수허브', enName: 'Pure Herb', desc: '원물 본연의 향을 즐길 수 있는 순수 루이보스티' },
   blended_herb: { name: '블렌디드 허브', enName: 'Blended Herb', desc: '여러 허브가 어우러진 풍성한 맛과 향의 차' },
   green_tea: { name: '녹차', desc: '제주 차밭의 햇살을 담은, 산뜻하고 가벼운 녹차' },
-  matcha: { name: '말차', desc: '고소하고 진한 맛의 차' },
+  matcha: { name: '말차', desc: '제주의 오설록 차밭에서 차광재배로 정성껏 길러낸 말차' },
   fermented_tea: { name: '발효차·홍차', desc: '향이 깊고 진한 맛의 차' },
   citrus: {
     name: '시트러스',
