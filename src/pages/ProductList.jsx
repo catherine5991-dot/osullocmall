@@ -27,9 +27,11 @@ function hasFlavorAromaTag(p) {
 // 이름에 "말차"가 없어도 실질적으로 말차류인 상품 (가루녹차 = 말차 가루)
 const MATCHA_OVERRIDE_NAMES = ['가루녹차']
 
-// 녹차/말차/호지차 베이스를 이름으로 세분화 (다른 필터와 겹쳐도 됨 — 한 상품이 여러 태그에 같이 보일 수 있음)
+// 녹차/말차/호지차 베이스를 이름으로 세분화. 블렌디드티(맛과 향 태그)가 붙은 상품은 여기서 제외하고
+// 블렌디드티 쪽에서만 보여줌 (허브티/홍차·발효차와 달리 녹차/말차/호지차엔 블렌디드류를 섞지 않음)
 function isPureGMH(p, kind) {
   if (p.base !== '녹차/말차/호지차') return false
+  if (hasFlavorAromaTag(p)) return false
   const isMatcha = p.name.includes('말차') || MATCHA_OVERRIDE_NAMES.includes(p.name)
   if (kind === 'matcha') return isMatcha
   if (kind === 'hoji') return p.name.includes('호지')
