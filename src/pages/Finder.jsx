@@ -569,12 +569,13 @@ function Finder() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastValue])
 
+  // 태그를 누르면 그 태그만 선택되고 나머지는 꺼짐. 이미 혼자 선택된 태그를 다시 누르면 전체 보기로 돌아감
   const toggleTag = (tag) => {
     setSelectedTags((prev) => {
-      const next = new Set(prev)
-      if (next.has(tag)) next.delete(tag)
-      else next.add(tag)
-      return next
+      if (prev.size === 1 && prev.has(tag)) {
+        return new Set(bannerCategory?.tags ?? [])
+      }
+      return new Set([tag])
     })
   }
 
