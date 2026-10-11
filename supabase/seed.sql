@@ -136,7 +136,6 @@ insert into public.product_tags (product_id, tag_id)
 select p.id, t.id from public.products p, public.tags t
 where
   (p.name = '캐모마일 라벤더' and t.name = '플로럴')
-   or   (p.name = '프리미엄 말차' and t.name = '너티')
    or   (p.name = '피치 캐모마일' and t.name = '프루티')
    or   (p.name = '스윗 히비스커스' and t.name = '프루티')
    or   (p.name = '루이보스 문라이트 10입' and t.name = '프루티')
