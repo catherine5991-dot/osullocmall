@@ -194,7 +194,13 @@ function ProductList() {
         <p className="mt-4 text-sm text-red-600">상품을 불러오지 못했어요. Supabase 연결을 확인해주세요.</p>
       )}
 
-      <div className="mt-5 flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div
+        onWheel={(e) => {
+          if (e.deltaY === 0) return
+          e.currentTarget.scrollLeft += e.deltaY
+        }}
+        className="mt-5 flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
         {BASE_FILTERS.map((f) => {
           const selected = activeBase === f.label
           return (
