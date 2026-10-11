@@ -43,7 +43,7 @@ export const BASE_FILTERS = [
   { label: '녹차', test: (p) => isPureGMH(p, 'green') || GREEN_EXTRA_NAMES.includes(p.name) },
   { label: '말차', test: (p) => isPureGMH(p, 'matcha') },
   { label: '호지차', test: (p) => isPureGMH(p, 'hoji') },
-  { label: '홍차 · 발효차', test: (p) => p.base === '홍차/발효차' },
+  { label: '홍차 · 발효차', test: (p) => p.base === '홍차/발효차' && !hasFlavorAromaTag(p) },
   { label: '블렌디드티', test: (p) => hasFlavorAromaTag(p) },
   { label: '허브티', test: (p) => p.base === '허브' },
   { label: '밀크티', test: (p) => MILK_NAMES.includes(p.name) },
