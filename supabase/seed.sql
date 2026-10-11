@@ -94,9 +94,9 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('스윗 히비스커스 콜드브루 티', null, null, 14000, '허브', '찬물스틱티백', true, false),
   ('시그니처 얼그레이 10입', null, null, 16500, '홍차/발효차', '피라미드티백', false, false),
   ('시그니처 얼그레이 20입', null, null, 27000, '홍차/발효차', '피라미드티백', false, false),
-  ('얼그레이 밀크티', '홍차 향 가득한 밀크티', '제주산 홍차의 깊은 향을 우유와 함께 즐겨보세요', 9000, '홍차/발효차', '찬물스틱티백', false, false),
+  ('얼그레이 밀크티', '홍차 향 가득한 밀크티', '제주산 홍차의 깊은 향을 우유와 함께 즐겨보세요', 9000, '홍차/발효차', '가루차', false, false),
   ('우전 60g', null, null, 70000, '녹차/말차/호지차', '잎차', false, false),
-  ('월출향 60g', null, null, 15000, '홍차/발효차', '잎차', false, false),
+  ('월출향 60g', null, null, 90000, '홍차/발효차', '잎차', false, false),
   ('웨딩그린티 20입', null, null, 27000, '녹차/말차/호지차', '피라미드티백', false, false),
   ('유자 얼그레이', null, null, 11000, '홍차/발효차', '종이티백', false, false),
   ('일로향 60g', null, null, 170000, '녹차/말차/호지차', '잎차', false, false),
@@ -128,7 +128,7 @@ insert into public.products (name, description, heritage_copy, price, base, form
   ('피차 파파야 블랙티 3입', null, null, 5500, '홍차/발효차', '피라미드티백', false, false),
   ('피치 캐모마일', '은은한 복숭아향 허브티', '편안한 캐모마일에 달콤한 복숭아향을 더했어요', 12500, '허브', '종이티백', true, false),
   ('허니 살구향 그린티', null, null, 11000, '녹차/말차/호지차', '종이티백', false, false),
-  ('홍우전 60g', null, null, 15000, '홍차/발효차', '잎차', false, false),
+  ('홍우전 60g', null, null, 90000, '홍차/발효차', '잎차', false, false),
   ('히비스커스 선샤인 10입', null, null, 16500, '허브', '피라미드티백', true, false);
 
 -- 상품-태그 연결
