@@ -66,7 +66,7 @@ const CATEGORY_LABELS = {
   sweet: {
     name: '스윗',
     desc: '달콤하고 부드러운 향의 차',
-    banner: '달콤한 꿀향과 부드러운 풍미가 어우러진 블렌디드티',
+    banner: '달콤하고 향긋한 꿀향이 어우러진 블렌디드티',
   },
   milk_style: { name: '밀크티', desc: '우유와 함께 즐기는 차' },
   cold_style: { name: '콜드', desc: '가볍고 시원하게 즐기는 차' },
