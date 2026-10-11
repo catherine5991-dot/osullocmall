@@ -57,7 +57,11 @@ const CATEGORY_LABELS = {
     banner: '달콤하고 싱그러운 Fruity 향이 어우러진 블렌디드티',
     tags: ['복숭아', '배', '귤', '체리', '무화과', '사과', '머스캣', '베리', '망고·파파야'],
   },
-  herbal: { name: '허벌', desc: '은은하고 편안한 향의 차' },
+  herbal: {
+    name: '허벌',
+    desc: '은은하고 편안한 향의 차',
+    banner: '은은한 Herbal 향과 편안한 풍미의 블렌디드티',
+  },
   milk_style: { name: '밀크티', desc: '우유와 함께 즐기는 차' },
   cold_style: { name: '콜드', desc: '가볍고 시원하게 즐기는 차' },
   fruity_herb: { name: '과일향 허브', desc: '은은한 과일향이 느껴지는 허브차' },
