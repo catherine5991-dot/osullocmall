@@ -114,7 +114,7 @@ function getFlavorQuestion(caffeineGroup) {
     return {
       title: 'Flavor',
       question: '어떤 맛과 향을 좋아하세요?',
-      note: '편안한 휴식과 차분한 기분을 위한 무카페인 허브티를 추천해요.',
+      note: '저녁 이후, 편안한 휴식과 차분한 기분을 위한 무카페인 허브티를 추천해요.',
       options: [
         { label: '한 가지 허브의 향이 좋아요', value: 'pure_herb' },
         { label: '여러 허브가 어우러진 풍성한 맛과 향이 좋아요', value: 'blended_herb' },
