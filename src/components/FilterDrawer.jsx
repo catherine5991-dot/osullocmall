@@ -20,7 +20,6 @@ export function emptyFilters() {
   return {
     flavorAroma: new Set(),
     rawMaterial: new Set(),
-    situation: new Set(),
     base: new Set(),
     format: new Set(),
     caffeineFree: false,
@@ -33,7 +32,6 @@ export function hasActiveFilters(filters) {
   return (
     filters.flavorAroma.size > 0 ||
     filters.rawMaterial.size > 0 ||
-    filters.situation.size > 0 ||
     filters.base.size > 0 ||
     filters.format.size > 0 ||
     filters.caffeineFree ||
@@ -50,11 +48,9 @@ export function matchesFilters(product, filters) {
 
   const flavor = namesOf('flavor_aroma')
   const raw = namesOf('raw_material')
-  const situation = namesOf('situation')
 
   if (filters.flavorAroma.size > 0 && !flavor.some((n) => filters.flavorAroma.has(n))) return false
   if (filters.rawMaterial.size > 0 && !raw.some((n) => filters.rawMaterial.has(n))) return false
-  if (filters.situation.size > 0 && !situation.some((n) => filters.situation.has(n))) return false
   if (filters.base.size > 0 && !filters.base.has(product.base)) return false
   if (filters.format.size > 0 && !filters.format.has(product.format)) return false
   if (filters.caffeineFree && !product.is_caffeine_free) return false
@@ -219,17 +215,6 @@ function FilterDrawer({ open, onClose, tags, products, appliedFilters, onApply }
                 label={opt.label}
                 checked={draft.format.has(opt.value)}
                 onChange={() => toggle('format', opt.value)}
-              />
-            ))}
-          </Section>
-
-          <Section title="상황">
-            {tags.situation.map((name) => (
-              <Checkbox
-                key={name}
-                label={name}
-                checked={draft.situation.has(name)}
-                onChange={() => toggle('situation', name)}
               />
             ))}
           </Section>
