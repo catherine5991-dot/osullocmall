@@ -84,7 +84,7 @@ const CATEGORY_LABELS = {
   calming: { name: '마음이 편안해지는 기분', banner: '차분하게 긴장을 풀고 싶을 때' },
   refreshing: {
     name: '개운하고 산뜻한 기분',
-    banner: '맑고 깔끔한 녹차와 달콤 상큼 물처럼 마시는 콜드브루티로 기분을 환기해요',
+    banner: '맑고 깔끔한 녹차나 산뜻하고 시원하게 즐기는 콜드브루티 어떠세요?',
   },
   adventurous: { name: '새롭고 재미있는 경험', banner: '다채로운 맛과 향을 즐기고 싶을 때' },
   comforting: { name: '익숙하고 따뜻한 위안', banner: '찻잎 본연의 향과 맛을 즐길 수 있는 순수차' },
