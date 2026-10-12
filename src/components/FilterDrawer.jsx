@@ -83,6 +83,26 @@ function Section({ title, extra, children }) {
   )
 }
 
+// 차 취향 찾기(Finder)의 세부 태그 버튼에 쓰이는 원물만 필터에도 노출 (나머지는 숨김)
+const RAW_MATERIAL_KEEP = [
+  '영귤', '유자', '레몬', '깔라만시', '동백꽃', '귤꽃', '벚꽃', '캐모마일', '라벤더', '장미',
+  '복숭아', '배', '귤', '망고', '파파야', '체리', '무화과', '사과', '머스캣',
+]
+
+function Pill({ label, checked, onChange }) {
+  return (
+    <button
+      type="button"
+      onClick={onChange}
+      className={`shrink-0 rounded-full border px-4 py-2 text-sm transition-colors ${
+        checked ? 'border-primary bg-primary text-white' : 'border-gray-300 text-gray-700'
+      }`}
+    >
+      {label}
+    </button>
+  )
+}
+
 function Checkbox({ label, checked, onChange }) {
   return (
     <label className="flex items-center gap-3 py-2 text-sm text-gray-800">
@@ -178,14 +198,18 @@ function FilterDrawer({ open, onClose, tags, products, appliedFilters, onApply }
           </Section>
 
           <Section title="원물">
-            {tags.raw_material.map((name) => (
-              <Checkbox
-                key={name}
-                label={name}
-                checked={draft.rawMaterial.has(name)}
-                onChange={() => toggle('rawMaterial', name)}
-              />
-            ))}
+            <div className="flex flex-wrap gap-2">
+              {tags.raw_material
+                .filter((name) => RAW_MATERIAL_KEEP.includes(name))
+                .map((name) => (
+                  <Pill
+                    key={name}
+                    label={name}
+                    checked={draft.rawMaterial.has(name)}
+                    onChange={() => toggle('rawMaterial', name)}
+                  />
+                ))}
+            </div>
           </Section>
 
           <Section
