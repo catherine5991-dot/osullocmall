@@ -102,8 +102,8 @@ const TIME_QUESTION = {
   title: 'Time',
   question: '언제 차를 마시고 싶은가요?',
   options: [
-    { label: '아침, 활기차게 하루를 시작하고 싶을 때', value: 'caffeine' },
-    { label: '낮 시간, 집중이 필요할 때', value: 'caffeine' },
+    { label: '아침, 활기차게 하루를 시작하고 싶을 때', value: 'morning' },
+    { label: '낮 시간, 집중이 필요할 때', value: 'afternoon' },
     { label: '저녁 이후, 편안하게 마무리하고 싶을 때', value: 'decaf' },
     { label: '시간 상관없이 언제든', value: 'any' },
   ],
@@ -124,10 +124,14 @@ function getFlavorQuestion(caffeineGroup) {
 
   // caffeineGroup === 'any'일 때도 아래 3개를 그대로 사용 (a는 pure_tea+pure_herb,
   // b는 blended_tea+blended_herb를 포괄하는 조건으로 추후 상품 매칭 단계에서 병합 처리)
+  const NOTE_BY_CAFFEINE_GROUP = {
+    morning: '활기찬 하루의 시작을 위한 향긋한 차를 추천해요.',
+    afternoon: '집중이 필요한 순간, 맑고 깊은 풍미의 차를 추천해요.',
+  }
   return {
     title: 'Flavor',
     question: '어떤 맛과 향을 좋아하세요?',
-    note: caffeineGroup === 'caffeine' ? '활기찬 하루의 시작을 위한 향긋한 차를 추천해요.' : undefined,
+    note: NOTE_BY_CAFFEINE_GROUP[caffeineGroup],
     options: [
       { label: '차 그대로의 맛과 향이 좋아요', value: 'pure_tea' },
       { label: '차에 다채로운 향이 더해진 풍성한 맛이 좋아요', value: 'blended_tea' },
