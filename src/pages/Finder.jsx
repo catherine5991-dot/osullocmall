@@ -315,10 +315,6 @@ function isPureTeaType(product, sub) {
   return false
 }
 
-function isPureTeaAny(product) {
-  return isPureTeaType(product, 'green_tea') || isPureTeaType(product, 'matcha') || isPureTeaType(product, 'fermented_tea')
-}
-
 function hasAromaTag(product, sub) {
   const tagName = AROMA_TAG_NAME[sub]
   return (product.product_tags ?? []).some((pt) => pt.tags?.category === 'flavor_aroma' && pt.tags?.name === tagName)
@@ -387,7 +383,7 @@ function resolveScreen(selectedCard, path) {
       if (subAns === undefined) return { type: 'question', q: CALMING_SUBQUESTION }
       const intro = '차분하게 쉬고 싶은 기분에 어울리는 차를 모아봤어요'
       if (subAns === 'single') {
-        return { type: 'result', intro, matcher: (p) => isPureTeaAny(p) || PURE_HERB_NAMES.includes(p.name) }
+        return { type: 'result', intro, matcher: (p) => PURE_HERB_NAMES.includes(p.name) }
       }
       return {
         type: 'result',
