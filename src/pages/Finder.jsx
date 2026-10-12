@@ -82,7 +82,10 @@ const CATEGORY_LABELS = {
   fruity_herb: { name: '과일향 허브', desc: '달콤한 과일향이 느껴지는 허브티' },
   herbal_essence: { name: '허브 본연의 향', desc: '싱그럽고 향긋한 원물 본연의 향을 담은 허브티' },
   calming: { name: '마음이 편안해지는 기분', banner: '차분하게 긴장을 풀고 싶을 때' },
-  refreshing: { name: '개운하고 산뜻한 기분', banner: '개운하고 산뜻한 기분을 선사하는 녹차와 콜드브루 티' },
+  refreshing: {
+    name: '개운하고 산뜻한 기분',
+    banner: '맑고 깔끔한 풍미의 녹차와 달콤 상큼하게 물처럼 즐기는 콜드브루티',
+  },
   adventurous: { name: '새롭고 재미있는 경험', banner: '다채로운 맛과 향을 즐기고 싶을 때' },
   comforting: { name: '익숙하고 따뜻한 위안', banner: '찻잎 본연의 향과 맛을 즐길 수 있는 순수차' },
   fragrant: { name: '화사하고 향긋한 기분', banner: '향기롭게 기분전환' },
