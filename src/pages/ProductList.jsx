@@ -157,7 +157,7 @@ function ProductList() {
     <div className="px-6 pt-8">
       <div className="flex items-baseline gap-2">
         {status === 'ready' && (
-          <span className="text-xl font-semibold">총 {filtered.length}개 상품</span>
+          <span className="text-sm text-gray-700">총 {filtered.length}개 상품</span>
         )}
       </div>
 
