@@ -204,8 +204,8 @@ const REWARD_SUBQUESTION = {
   title: '',
   question: '어떤 밀크티가 좋으세요?',
   options: [
-    { label: '직접 우려먹는 밀크티를 위한 홍차', value: 'brewed', image: moodMilkBrewedImg },
-    { label: '간편하게 바로 타먹는 분말 밀크티', value: 'powder', image: moodMilkPowderImg },
+    { label: '직접 우려먹는 밀크티를 위한 홍차', enLabel: 'Teabag', value: 'brewed', image: moodMilkBrewedImg },
+    { label: '간편하게 바로 타먹는 분말 밀크티', enLabel: 'Powder', value: 'powder', image: moodMilkPowderImg },
   ],
 }
 
