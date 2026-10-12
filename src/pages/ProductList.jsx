@@ -156,18 +156,8 @@ function ProductList() {
   return (
     <div className="px-6 pt-8">
       <div className="flex items-baseline gap-2">
-        <button
-          type="button"
-          onClick={() => {
-            setActiveBase(null)
-            setFilters(emptyFilters())
-          }}
-          className="text-xl font-semibold"
-        >
-          전체 상품
-        </button>
         {status === 'ready' && (
-          <span className="text-sm text-gray-600">총 {filtered.length}개 상품</span>
+          <span className="text-xl font-semibold">총 {filtered.length}개 상품</span>
         )}
       </div>
 
