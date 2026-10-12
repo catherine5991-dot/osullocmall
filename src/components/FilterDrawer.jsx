@@ -40,6 +40,32 @@ export function hasActiveFilters(filters) {
   )
 }
 
+// 검색결과 위에 보여줄 '선택한 필터' 칩 목록 (라벨 + 제거용 category/value)
+export function getActiveFilterChips(filters) {
+  const chips = []
+  filters.flavorAroma.forEach((v) => chips.push({ category: 'flavorAroma', value: v, label: v }))
+  filters.rawMaterial.forEach((v) => chips.push({ category: 'rawMaterial', value: v, label: v }))
+  filters.base.forEach((v) => {
+    const opt = BASE_OPTIONS.find((o) => o.value === v)
+    chips.push({ category: 'base', value: v, label: opt ? opt.label : v })
+  })
+  filters.format.forEach((v) => chips.push({ category: 'format', value: v, label: v }))
+  if (filters.caffeineFree) chips.push({ category: 'caffeineFree', value: true, label: '무카페인' })
+  if (filters.decaf) chips.push({ category: 'decaf', value: true, label: '디카페인' })
+  if (filters.organic) chips.push({ category: 'organic', value: true, label: '유기농' })
+  return chips
+}
+
+// 칩의 × 버튼을 눌렀을 때 그 필터 하나만 제거한 새 filters 객체를 반환
+export function removeFilterChip(filters, chip) {
+  if (chip.category === 'caffeineFree' || chip.category === 'decaf' || chip.category === 'organic') {
+    return { ...filters, [chip.category]: false }
+  }
+  const next = new Set(filters[chip.category])
+  next.delete(chip.value)
+  return { ...filters, [chip.category]: next }
+}
+
 export function matchesFilters(product, filters) {
   const namesOf = (category) =>
     (product.product_tags ?? [])

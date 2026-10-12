@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import cartIcon from '../assets/icon-cart.png'
-import FilterDrawer, { emptyFilters, hasActiveFilters, matchesFilters } from '../components/FilterDrawer.jsx'
+import FilterDrawer, {
+  emptyFilters,
+  getActiveFilterChips,
+  hasActiveFilters,
+  matchesFilters,
+  removeFilterChip,
+} from '../components/FilterDrawer.jsx'
 import { supabase } from '../lib/supabaseClient'
 import {
   BASE_FILTERS,
@@ -240,6 +246,22 @@ function ProductList() {
           <option value="price_desc">높은가격순</option>
         </select>
       </div>
+
+      {hasActiveFilters(filters) && (
+        <div className="mt-3 flex flex-wrap gap-2">
+          {getActiveFilterChips(filters).map((chip) => (
+            <button
+              key={`${chip.category}-${chip.value}`}
+              type="button"
+              onClick={() => setFilters(removeFilterChip(filters, chip))}
+              className="flex items-center gap-1 rounded-full bg-sub-light px-3 py-1.5 text-xs text-gray-700"
+            >
+              {chip.label}
+              <span aria-hidden="true">✕</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="mt-5 grid grid-cols-2 gap-x-3 gap-y-6">
         {sortedFiltered.map((p) => (
