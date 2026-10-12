@@ -52,6 +52,7 @@ const CATEGORY_LABELS = {
   pure_herb: { name: '순수허브', enName: 'Pure Herb', desc: '포근하고 달큰한 원물 본연의 향을 즐기는 순수 루이보스티' },
   // Mood > 마음이 편안해지는 기분 > 한 가지 재료의 맛과 향 결과 화면도 pure_herb와 똑같은 상품 목록을 보여주므로 배너도 동일하게 맞춤
   single: { name: '순수허브', desc: '포근하고 달큰한 원물 본연의 향을 즐기는 순수 루이보스티' },
+  blended: { name: '블렌디드 허브', desc: '다채로운 허브의 향과 풍미를 담은 허브티' },
   blended_herb: { name: '블렌디드 허브', enName: 'Blended Herb', desc: '다채로운 허브의 향과 풍미를 담은 허브티' },
   green_tea: { name: '녹차', desc: '제주 돌송이 차밭의 햇살과 한라산의 바람을 담은 향이 좋은 녹차' },
   matcha: { name: '말차', desc: '색이 좋은 제주 서광 차밭에서 차광재배로 정성껏 길러낸 말차' },
@@ -350,7 +351,7 @@ function resolveScreen(selectedCard, path) {
   }
 
   if (selectedCard === 'mood') {
-    const [moodAns, subAns] = path
+    const [moodAns, subAns, subAns2] = path
     if (moodAns === undefined) return { type: 'question', q: MOOD_QUESTION }
 
     if (moodAns === 'refreshing') {
@@ -386,11 +387,10 @@ function resolveScreen(selectedCard, path) {
       if (subAns === 'single') {
         return { type: 'result', matcher: (p) => PURE_HERB_NAMES.includes(p.name) }
       }
-      return {
-        type: 'result',
-        intro: '차분하게 쉬고 싶은 기분에 어울리는 차를 모아봤어요',
-        matcher: (p) => hasAnyAromaTag(p) || FRUITY_HERB_NAMES.includes(p.name) || HERBAL_ESSENCE_NAMES.includes(p.name),
-      }
+      // subAns === 'blended'면 Time > 저녁 이후 > 블렌디드 허브 흐름과 동일하게
+      // 허브 본연의 향/과일향 허브를 한 번 더 물어보고, 결과 상품 목록도 그대로 맞춤
+      if (subAns2 === undefined) return { type: 'question', q: HERB_BLEND_SUBQUESTION }
+      return { type: 'result', matcher: (p) => productMatchesFlavor(p, 'blended_herb', subAns2) }
     }
   }
 
@@ -436,7 +436,10 @@ function getStepLabels(selectedCard, path) {
   }
 
   if (selectedCard === 'mood') {
-    const [moodAns] = path
+    const [moodAns, moodSubAns] = path
+    if (moodAns === 'calming' && moodSubAns === 'blended') {
+      return ['Mood', 'Flavor', 'Blended Herb', 'Result']
+    }
     if (['comforting', 'fragrant', 'calming', 'reward'].includes(moodAns)) {
       const subLabel = { comforting: 'Pure Tea', fragrant: 'Blended Tea', calming: 'Flavor', reward: 'Milk Tea' }[
         moodAns
