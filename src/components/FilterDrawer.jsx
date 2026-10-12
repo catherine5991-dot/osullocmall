@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { RAW_MATERIAL_DETAIL_TAGS } from '../lib/productClassification.js'
 
 // 베이스/제형은 DB check 제약과 동일한 고정 옵션 (products.base / products.format)
 const BASE_OPTIONS = [
@@ -47,10 +48,14 @@ export function matchesFilters(product, filters) {
       .map((t) => t.name)
 
   const flavor = namesOf('flavor_aroma')
-  const raw = namesOf('raw_material')
 
   if (filters.flavorAroma.size > 0 && !flavor.some((n) => filters.flavorAroma.has(n))) return false
-  if (filters.rawMaterial.size > 0 && !raw.some((n) => filters.rawMaterial.has(n))) return false
+  if (
+    filters.rawMaterial.size > 0 &&
+    ![...filters.rawMaterial].some((tag) => RAW_MATERIAL_DETAIL_TAGS[tag]?.includes(product.name))
+  ) {
+    return false
+  }
   if (filters.base.size > 0 && !filters.base.has(product.base)) return false
   if (filters.format.size > 0 && !filters.format.has(product.format)) return false
   if (filters.caffeineFree && !product.is_caffeine_free) return false
@@ -82,12 +87,6 @@ function Section({ title, extra, children }) {
     </div>
   )
 }
-
-// 차 취향 찾기(Finder)의 세부 태그 버튼에 쓰이는 원물만 필터에도 노출 (나머지는 숨김)
-const RAW_MATERIAL_KEEP = [
-  '영귤', '유자', '레몬', '깔라만시', '동백꽃', '귤꽃', '벚꽃', '캐모마일', '라벤더', '장미',
-  '복숭아', '배', '귤', '망고', '파파야', '체리', '무화과', '사과', '머스캣',
-]
 
 function Pill({ label, checked, onChange }) {
   return (
@@ -199,16 +198,14 @@ function FilterDrawer({ open, onClose, tags, products, appliedFilters, onApply }
 
           <Section title="원물">
             <div className="flex flex-wrap gap-2">
-              {tags.raw_material
-                .filter((name) => RAW_MATERIAL_KEEP.includes(name))
-                .map((name) => (
-                  <Pill
-                    key={name}
-                    label={name}
-                    checked={draft.rawMaterial.has(name)}
-                    onChange={() => toggle('rawMaterial', name)}
-                  />
-                ))}
+              {Object.keys(RAW_MATERIAL_DETAIL_TAGS).map((name) => (
+                <Pill
+                  key={name}
+                  label={name}
+                  checked={draft.rawMaterial.has(name)}
+                  onChange={() => toggle('rawMaterial', name)}
+                />
+              ))}
             </div>
           </Section>
 

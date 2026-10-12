@@ -96,7 +96,7 @@ function ProductList() {
   const [activeBase, setActiveBase] = useState(null)
   const [filterOpen, setFilterOpen] = useState(false)
   const [filters, setFilters] = useState(emptyFilters())
-  const [tags, setTags] = useState({ flavor_aroma: [], raw_material: [] })
+  const [tags, setTags] = useState({ flavor_aroma: [] })
   const [sortBy, setSortBy] = useState('popular')
   const dragRef = useRef({ down: false, startX: 0, startScroll: 0, moved: false })
 
@@ -129,7 +129,6 @@ function ProductList() {
         if (error || !data) return
         setTags({
           flavor_aroma: data.filter((t) => t.category === 'flavor_aroma').map((t) => t.name),
-          raw_material: data.filter((t) => t.category === 'raw_material').map((t) => t.name),
         })
       })
   }, [])
