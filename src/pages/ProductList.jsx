@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import cartIcon from '../assets/icon-cart.png'
 import FilterDrawer, { emptyFilters, hasActiveFilters, matchesFilters } from '../components/FilterDrawer.jsx'
@@ -86,6 +86,7 @@ function ProductList() {
   const [filters, setFilters] = useState(emptyFilters())
   const [tags, setTags] = useState({ flavor_aroma: [], raw_material: [], situation: [] })
   const [sortBy, setSortBy] = useState('popular')
+  const dragRef = useRef({ down: false, startX: 0, startScroll: 0, moved: false })
 
   useEffect(() => {
     supabase
@@ -164,7 +165,30 @@ function ProductList() {
           if (e.deltaY === 0) return
           e.currentTarget.scrollLeft += e.deltaY
         }}
-        className="mt-5 flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        onPointerDown={(e) => {
+          if (e.pointerType !== 'mouse') return
+          dragRef.current = { down: true, startX: e.clientX, startScroll: e.currentTarget.scrollLeft, moved: false }
+        }}
+        onPointerMove={(e) => {
+          if (!dragRef.current.down) return
+          const dx = e.clientX - dragRef.current.startX
+          if (Math.abs(dx) > 3) dragRef.current.moved = true
+          e.currentTarget.scrollLeft = dragRef.current.startScroll - dx
+        }}
+        onPointerUp={() => {
+          dragRef.current.down = false
+        }}
+        onPointerLeave={() => {
+          dragRef.current.down = false
+        }}
+        onClickCapture={(e) => {
+          if (dragRef.current.moved) {
+            e.preventDefault()
+            e.stopPropagation()
+            dragRef.current.moved = false
+          }
+        }}
+        className="mt-5 flex cursor-grab gap-2 overflow-x-auto select-none [scrollbar-width:none] active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
       >
         {BASE_FILTERS.map((f) => {
           const selected = activeBase === f.label
