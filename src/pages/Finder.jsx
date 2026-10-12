@@ -83,7 +83,7 @@ const CATEGORY_LABELS = {
   herbal_essence: { name: '허브 본연의 향', desc: '싱그럽고 향긋한 원물 본연의 향을 담은 허브티' },
   calming: {
     name: '마음이 편안해지는 기분',
-    banner: '마음이 편안해지고 차분하게 긴장을 풀고 싶을 때는 무카페인 허브티 어떠세요?',
+    banner: '편안한 휴식과 차분한 기분을 위한 무카페인 허브티를 추천해요.',
   },
   refreshing: {
     name: '개운하고 산뜻한 기분',
@@ -196,11 +196,11 @@ const MOOD_QUESTION = {
 }
 
 const CALMING_SUBQUESTION = {
-  title: '', // 확인 배너가 제목을 대신함
-  question: '한 가지 재료의 맛과 향이 좋으세요, 여러 재료가 어우러진 맛과 향이 좋으세요?',
+  title: 'Flavor',
+  question: '어떤 맛과 향을 좋아하세요?',
   options: [
-    { label: '한 가지 재료 본연의 맛과 향이 좋아요', value: 'single' },
-    { label: '여러 재료가 어우러진 풍성한 맛과 향이 좋아요', value: 'blended' },
+    { label: '한 가지 허브의 향이 좋아요', value: 'single' },
+    { label: '여러 허브가 어우러진 풍성한 맛과 향이 좋아요', value: 'blended' },
   ],
 }
 
