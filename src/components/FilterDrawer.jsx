@@ -189,7 +189,15 @@ function FilterDrawer({ open, onClose, tags, products, appliedFilters, onApply }
         <div className="flex items-center justify-between border-b border-gray-100 px-5 py-4">
           <h2 className="text-lg font-semibold">Filter</h2>
           <div className="flex items-center gap-3">
-            <button type="button" onClick={() => setDraft(emptyFilters())} className="text-xs text-gray-400 underline">
+            <button
+              type="button"
+              onClick={() => {
+                const empty = emptyFilters()
+                setDraft(empty)
+                onApply(empty)
+              }}
+              className="text-xs text-gray-400 underline"
+            >
               초기화
             </button>
             <button type="button" aria-label="닫기" onClick={onClose} className="text-xl leading-none">
