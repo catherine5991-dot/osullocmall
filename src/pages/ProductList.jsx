@@ -176,52 +176,54 @@ function ProductList() {
         <p className="mt-4 text-sm text-red-600">상품을 불러오지 못했어요. Supabase 연결을 확인해주세요.</p>
       )}
 
-      <div
-        onWheel={(e) => {
-          if (e.deltaY === 0) return
-          e.currentTarget.scrollLeft += e.deltaY
-        }}
-        onPointerDown={(e) => {
-          if (e.pointerType !== 'mouse') return
-          dragRef.current = { down: true, startX: e.clientX, startScroll: e.currentTarget.scrollLeft, moved: false }
-        }}
-        onPointerMove={(e) => {
-          if (!dragRef.current.down) return
-          const dx = e.clientX - dragRef.current.startX
-          if (Math.abs(dx) > 3) dragRef.current.moved = true
-          e.currentTarget.scrollLeft = dragRef.current.startScroll - dx
-        }}
-        onPointerUp={() => {
-          dragRef.current.down = false
-        }}
-        onPointerLeave={() => {
-          dragRef.current.down = false
-        }}
-        onClickCapture={(e) => {
-          if (dragRef.current.moved) {
-            e.preventDefault()
-            e.stopPropagation()
-            dragRef.current.moved = false
-          }
-        }}
-        className="mt-5 flex cursor-grab gap-2 overflow-x-auto select-none [scrollbar-width:none] active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
-      >
-        {BASE_FILTERS.map((f) => {
-          const selected = activeBase === f.label
-          return (
-            <button
-              key={f.label}
-              type="button"
-              onClick={() => setActiveBase(selected ? null : f.label)}
-              className={`shrink-0 rounded-full border px-4 py-2 text-sm transition-colors ${
-                selected ? 'border-primary bg-primary text-white' : 'border-gray-300 text-gray-700'
-              }`}
-            >
-              {f.label}
-            </button>
-          )
-        })}
-      </div>
+      {!hasActiveFilters(filters) && (
+        <div
+          onWheel={(e) => {
+            if (e.deltaY === 0) return
+            e.currentTarget.scrollLeft += e.deltaY
+          }}
+          onPointerDown={(e) => {
+            if (e.pointerType !== 'mouse') return
+            dragRef.current = { down: true, startX: e.clientX, startScroll: e.currentTarget.scrollLeft, moved: false }
+          }}
+          onPointerMove={(e) => {
+            if (!dragRef.current.down) return
+            const dx = e.clientX - dragRef.current.startX
+            if (Math.abs(dx) > 3) dragRef.current.moved = true
+            e.currentTarget.scrollLeft = dragRef.current.startScroll - dx
+          }}
+          onPointerUp={() => {
+            dragRef.current.down = false
+          }}
+          onPointerLeave={() => {
+            dragRef.current.down = false
+          }}
+          onClickCapture={(e) => {
+            if (dragRef.current.moved) {
+              e.preventDefault()
+              e.stopPropagation()
+              dragRef.current.moved = false
+            }
+          }}
+          className="mt-5 flex cursor-grab gap-2 overflow-x-auto select-none [scrollbar-width:none] active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
+        >
+          {BASE_FILTERS.map((f) => {
+            const selected = activeBase === f.label
+            return (
+              <button
+                key={f.label}
+                type="button"
+                onClick={() => setActiveBase(selected ? null : f.label)}
+                className={`shrink-0 rounded-full border px-4 py-2 text-sm transition-colors ${
+                  selected ? 'border-primary bg-primary text-white' : 'border-gray-300 text-gray-700'
+                }`}
+              >
+                {f.label}
+              </button>
+            )
+          })}
+        </div>
+      )}
 
       <div className="mt-4 flex items-center justify-between border-y border-gray-100 py-3">
         <button
