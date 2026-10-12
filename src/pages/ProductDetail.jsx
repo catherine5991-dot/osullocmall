@@ -29,6 +29,7 @@ function ProductDetail() {
   const [product, setProduct] = useState(null)
   const [recommended, setRecommended] = useState([])
   const [recoReason, setRecoReason] = useState('')
+  const [cartToastOpen, setCartToastOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0) // 0~1
   const recoScrollRef = useRef(null)
   const trackRef = useRef(null)
@@ -200,6 +201,7 @@ function ProductDetail() {
       <div className="mt-5 flex gap-2 px-6">
         <button
           type="button"
+          onClick={() => setCartToastOpen(true)}
           className="flex-1 rounded-[2px] border border-black bg-white py-3 text-sm font-semibold"
         >
           장바구니
@@ -308,6 +310,51 @@ function ProductDetail() {
           상품 수령 후 7일 이내 가능해요.
         </p>
       </div>
+
+      {cartToastOpen && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center">
+          <button
+            type="button"
+            aria-label="닫기"
+            onClick={() => setCartToastOpen(false)}
+            className="absolute inset-0 bg-black/40"
+          />
+          <div className="relative w-full max-w-md rounded-t-[12px] bg-white pb-6">
+            <div className="flex items-center gap-3 border-b border-gray-100 px-5 py-4">
+              <div className={`h-12 w-12 shrink-0 rounded-[2px] ${thumbColor}`} />
+              <p className="flex-1 text-sm font-semibold">장바구니에 상품이 담겼습니다.</p>
+              <button
+                type="button"
+                aria-label="닫기"
+                onClick={() => setCartToastOpen(false)}
+                className="text-lg leading-none text-gray-400"
+              >
+                ✕
+              </button>
+            </div>
+
+            {recommended.length > 0 && (
+              <div className="px-5 pt-4 text-left">
+                <h3 className="text-sm font-semibold text-gray-500">방금 담은 상품과 비슷한 제품</h3>
+                <div className="mt-3 grid grid-cols-2 gap-3">
+                  {recommended.slice(0, 2).map((rp) => (
+                    <Link
+                      key={rp.id}
+                      to={`/products/${rp.id}`}
+                      onClick={() => setCartToastOpen(false)}
+                      className="block text-left"
+                    >
+                      <div className={`aspect-square w-full rounded-[2px] ${THUMB_COLORS[rp.base] ?? 'bg-gray-100'}`} />
+                      <p className="mt-2 line-clamp-2 text-xs leading-snug font-semibold">{rp.name}</p>
+                      <p className="mt-1 text-xs text-gray-500">{rp.price.toLocaleString()}원</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
