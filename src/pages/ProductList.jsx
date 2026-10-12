@@ -67,7 +67,19 @@ function ProductCard({ product: p }) {
       </div>
 
       <div className="mt-2">
-        <p className="text-sm font-semibold">{p.name}</p>
+        <p className="flex items-center gap-1 text-sm font-semibold">
+          {p.name}
+          {p.is_caffeine_free && (
+            <span className="shrink-0 rounded-[2px] bg-sub-light px-1 py-0.5 text-[9px] font-normal text-gray-700">
+              무카페인
+            </span>
+          )}
+          {p.is_organic && (
+            <span className="shrink-0 rounded-[2px] bg-sub-light px-1 py-0.5 text-[9px] font-normal text-gray-700">
+              유기농
+            </span>
+          )}
+        </p>
         <p className="mt-1 text-xs text-gray-500">
           {displayBase} | {p.format}
           {aromaTags.length > 0 && !displayBase.includes('블렌디드티') ? ' · 블렌디드티' : ''}
