@@ -95,7 +95,10 @@ const CATEGORY_LABELS = {
     tags: ['블렌디드티', '말차플러스', '콤부차'],
   },
   comforting: { name: '익숙하고 따뜻한 위안', banner: '찻잎 본연의 깊은 맛과 향으로 편안함을 전하는 순수차를 추천해요.' },
-  fragrant: { name: '화사하고 향긋한 기분', banner: '향기롭게 기분전환' },
+  fragrant: {
+    name: '화사하고 향긋한 기분',
+    banner: '다채로운 꽃, 과일의 향으로 기분 전환을 돕는 블렌디드티와 허브티를 추천해요.',
+  },
   reward: { name: '나를 위한 작은 보상', banner: '달달하게 당 충전' },
 }
 
