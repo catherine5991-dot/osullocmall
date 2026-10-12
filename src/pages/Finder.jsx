@@ -14,6 +14,8 @@ import blendedNuttyImg from '../assets/option-blended-nutty.png'
 import blendedSweetImg from '../assets/option-blended-sweet.png'
 import drinkColdImg from '../assets/option-drink-cold.jpg'
 import drinkMilkImg from '../assets/option-drink-milk.jpg'
+import moodMilkBrewedImg from '../assets/option-mood-milk-brewed.png'
+import moodMilkPowderImg from '../assets/option-mood-milk-powder.png'
 import herbFloralImg from '../assets/option-herb-floral.png'
 import herbFruityImg from '../assets/option-herb-fruity.png'
 import pureFermentedImg from '../assets/option-pure-fermented.jpg'
@@ -198,6 +200,15 @@ const HERB_BLEND_SUBQUESTION = {
   ],
 }
 
+const REWARD_SUBQUESTION = {
+  title: '',
+  question: '어떤 밀크티가 좋으세요?',
+  options: [
+    { label: '직접 우려먹는 밀크티를 위한 홍차', value: 'brewed', image: moodMilkBrewedImg },
+    { label: '간편하게 바로 타먹는 분말 밀크티', value: 'powder', image: moodMilkPowderImg },
+  ],
+}
+
 const MOOD_QUESTION = {
   title: 'Mood',
   question: '오늘 나에게 필요한 것은 무엇인가요?',
@@ -235,6 +246,7 @@ const HERBAL_ESSENCE_NAMES = ['캐모마일 라벤더', '바질 보타닉 가든
 const MATCHA_PLUS_NAMES = ['말차플러스 프로바이오틱스', '말차플러스 테아닌', '말차플러스 콜라겐']
 const PURE_HERB_NAMES = ['루이보스 퓨어 10입', '찬물 루이보스티']
 const KOMBUCHA_NAMES = ['콤부차 애플파인', '콤부차 리치피치', '콤부차 깔라망고']
+const MILK_BREWED_NAMES = ['시그니처 얼그레이 10입', '시그니처 얼그레이 20입']
 
 const AROMA_TAG_NAME = { citrus: '시트러스', floral: '플로럴', nutty: '너티', fruity: '프루티', herbal: '허벌', sweet: '스윗' }
 
@@ -384,7 +396,11 @@ function resolveScreen(selectedCard, path) {
           (p.format === '찬물스틱티백' && (hasAromaTag(p, 'citrus') || hasAromaTag(p, 'fruity'))),
       }
     }
-    if (moodAns === 'reward') return { type: 'result', matcher: (p) => MILK_NAMES.includes(p.name) }
+    if (moodAns === 'reward') {
+      if (subAns === undefined) return { type: 'question', q: REWARD_SUBQUESTION }
+      if (subAns === 'brewed') return { type: 'result', matcher: (p) => MILK_BREWED_NAMES.includes(p.name) }
+      return { type: 'result', matcher: (p) => MILK_NAMES.includes(p.name) }
+    }
     if (moodAns === 'adventurous') {
       return {
         type: 'result',
@@ -456,8 +472,10 @@ function getStepLabels(selectedCard, path) {
 
   if (selectedCard === 'mood') {
     const [moodAns] = path
-    if (['comforting', 'fragrant', 'calming'].includes(moodAns)) {
-      const subLabel = { comforting: 'Pure Tea', fragrant: 'Blended Tea', calming: 'Flavor' }[moodAns]
+    if (['comforting', 'fragrant', 'calming', 'reward'].includes(moodAns)) {
+      const subLabel = { comforting: 'Pure Tea', fragrant: 'Blended Tea', calming: 'Flavor', reward: 'Milk Tea' }[
+        moodAns
+      ]
       return ['Mood', subLabel, 'Result']
     }
     return ['Mood', 'Result']
