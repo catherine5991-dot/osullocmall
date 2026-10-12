@@ -5,8 +5,18 @@ import { RAW_MATERIAL_DETAIL_TAGS } from '../lib/productClassification.js'
 const BASE_OPTIONS = [
   { value: '녹차/말차/호지차', label: '녹차 · 말차 · 호지차' },
   { value: '홍차/발효차', label: '홍차 · 발효차' },
-  { value: '허브', label: '허브' },
+  { value: '허브', label: '허브티' },
 ]
+
+// 차 취향 찾기(Finder) 질문 화면과 동일한 영문 표기
+const FLAVOR_AROMA_EN = {
+  시트러스: 'Citrus',
+  플로럴: 'Floral',
+  너티: 'Nutty',
+  프루티: 'Fruity',
+  허벌: 'Herbal',
+  스윗: 'Sweet',
+}
 
 const FORMAT_OPTIONS = [
   { value: '잎차', label: '잎차', desc: '찻잎을 그대로 우려 마시는 가장 기본적인 형태예요.' },
@@ -43,7 +53,7 @@ export function hasActiveFilters(filters) {
 // 검색결과 위에 보여줄 '선택한 필터' 칩 목록 (라벨 + 제거용 category/value)
 export function getActiveFilterChips(filters) {
   const chips = []
-  filters.flavorAroma.forEach((v) => chips.push({ category: 'flavorAroma', value: v, label: v }))
+  filters.flavorAroma.forEach((v) => chips.push({ category: 'flavorAroma', value: v, label: FLAVOR_AROMA_EN[v] ?? v }))
   filters.rawMaterial.forEach((v) => chips.push({ category: 'rawMaterial', value: v, label: v }))
   filters.base.forEach((v) => {
     const opt = BASE_OPTIONS.find((o) => o.value === v)
@@ -212,14 +222,16 @@ function FilterDrawer({ open, onClose, tags, products, appliedFilters, onApply }
           </Section>
 
           <Section title="맛과 향">
-            {tags.flavor_aroma.map((name) => (
-              <Checkbox
-                key={name}
-                label={name}
-                checked={draft.flavorAroma.has(name)}
-                onChange={() => toggle('flavorAroma', name)}
-              />
-            ))}
+            <div className="flex flex-wrap gap-2">
+              {tags.flavor_aroma.map((name) => (
+                <Pill
+                  key={name}
+                  label={FLAVOR_AROMA_EN[name] ?? name}
+                  checked={draft.flavorAroma.has(name)}
+                  onChange={() => toggle('flavorAroma', name)}
+                />
+              ))}
+            </div>
           </Section>
 
           <Section title="원물">
