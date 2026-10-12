@@ -127,6 +127,7 @@ function getFlavorQuestion(caffeineGroup) {
   return {
     title: 'Flavor',
     question: '어떤 맛과 향을 좋아하세요?',
+    note: caffeineGroup === 'caffeine' ? '활기찬 하루의 시작을 위한 향긋한 차를 추천해요.' : undefined,
     options: [
       { label: '차 그대로의 맛과 향이 좋아요', value: 'pure_tea' },
       { label: '차에 다채로운 향이 더해진 풍성한 맛이 좋아요', value: 'blended_tea' },
