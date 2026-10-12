@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react'
-import { KOMBUCHA_NAMES, RAW_MATERIAL_DETAIL_TAGS } from '../lib/productClassification.js'
+import { BASE_FILTERS, KOMBUCHA_NAMES, MILK_NAMES, RAW_MATERIAL_DETAIL_TAGS } from '../lib/productClassification.js'
 
-// 베이스는 DB check 제약(products.base)과 다르게 콤부차를 허브티에서 따로 뺀 가상 카테고리라
-// 고정 값 대신 test 함수로 판별함. 제형은 DB check 제약과 동일한 고정 옵션(products.format)
+const findBaseFilterTest = (label) => BASE_FILTERS.find((f) => f.label === label).test
+
+// 베이스는 DB check 제약(products.base)과 다르게 녹차/말차/호지차를 각각 나누고 콤부차·우유를
+// 따로 뺀 가상 카테고리라 고정 값 대신 test 함수로 판별함 (상품 목록 상단 알약과 동일한 기준을 재사용).
+// 제형은 DB check 제약과 동일한 고정 옵션(products.format)
 const BASE_OPTIONS = [
-  { value: 'green', label: '녹차 · 말차 · 호지차', test: (p) => p.base === '녹차/말차/호지차' },
+  { value: 'green', label: '녹차', test: findBaseFilterTest('녹차') },
+  { value: 'matcha', label: '말차', test: findBaseFilterTest('말차') },
+  { value: 'hoji', label: '호지차', test: findBaseFilterTest('호지차') },
   { value: 'fermented', label: '홍차 · 발효차', test: (p) => p.base === '홍차/발효차' },
   { value: 'herbal', label: '허브티', test: (p) => p.base === '허브' && !KOMBUCHA_NAMES.includes(p.name) },
   { value: 'kombucha', label: '콤부차', test: (p) => KOMBUCHA_NAMES.includes(p.name) },
+  { value: 'milk', label: '우유', test: (p) => MILK_NAMES.includes(p.name) },
 ]
 
 // 차 취향 찾기(Finder) 질문 화면과 동일한 영문 표기
@@ -26,7 +32,6 @@ const FORMAT_OPTIONS = [
   { value: '종이티백', label: '종이티백', desc: '간편하게 우려 마실 수 있는 일반 티백이에요.' },
   { value: '찬물스틱티백', label: '찬물스틱티백', desc: '찬물에 넣기만 해도 빠르게 우러나는 스틱형 티백이에요.' },
   { value: '가루차', label: '가루차', desc: '물이나 우유에 타 마시는 가루 형태의 차예요.' },
-  { value: '세트', label: '세트', desc: '여러 종류를 함께 구성한 선물용 세트예요.' },
 ]
 
 export function emptyFilters() {
@@ -36,7 +41,6 @@ export function emptyFilters() {
     base: new Set(),
     format: new Set(),
     caffeineFree: false,
-    decaf: false, // 아직 상품 데이터에 디카페인 구분 필드가 없어 필터링에는 쓰이지 않음 (UI만)
     organic: false,
   }
 }
@@ -63,14 +67,13 @@ export function getActiveFilterChips(filters) {
   })
   filters.format.forEach((v) => chips.push({ category: 'format', value: v, label: v }))
   if (filters.caffeineFree) chips.push({ category: 'caffeineFree', value: true, label: '무카페인' })
-  if (filters.decaf) chips.push({ category: 'decaf', value: true, label: '디카페인' })
   if (filters.organic) chips.push({ category: 'organic', value: true, label: '유기농' })
   return chips
 }
 
 // 칩의 × 버튼을 눌렀을 때 그 필터 하나만 제거한 새 filters 객체를 반환
 export function removeFilterChip(filters, chip) {
-  if (chip.category === 'caffeineFree' || chip.category === 'decaf' || chip.category === 'organic') {
+  if (chip.category === 'caffeineFree' || chip.category === 'organic') {
     return { ...filters, [chip.category]: false }
   }
   const next = new Set(filters[chip.category])
@@ -106,27 +109,25 @@ export function matchesFilters(product, filters) {
   return true
 }
 
-function Section({ title, extra, children }) {
+function Section({ title, headerExtra, children }) {
   const [open, setOpen] = useState(true)
 
   return (
     <div className="border-b border-gray-100 py-4">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between text-base text-gray-900"
-      >
-        {title}
-        <span aria-hidden className="text-gray-400">
-          {open ? '︿' : '﹀'}
-        </span>
-      </button>
-      {open && (
-        <div className="mt-3">
-          {extra}
-          {children}
-        </div>
-      )}
+      <div className="flex w-full items-center justify-between">
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className="flex items-center gap-1.5 text-base text-gray-900"
+        >
+          {title}
+          <span aria-hidden className="text-gray-400">
+            {open ? '︿' : '﹀'}
+          </span>
+        </button>
+        {headerExtra}
+      </div>
+      {open && <div className="mt-3">{children}</div>}
     </div>
   )
 }
@@ -214,11 +215,6 @@ function FilterDrawer({ open, onClose, tags, products, appliedFilters, onApply }
               onChange={() => setDraft((prev) => ({ ...prev, caffeineFree: !prev.caffeineFree }))}
             />
             <Checkbox
-              label="디카페인"
-              checked={draft.decaf}
-              onChange={() => setDraft((prev) => ({ ...prev, decaf: !prev.decaf }))}
-            />
-            <Checkbox
               label="유기농"
               checked={draft.organic}
               onChange={() => setDraft((prev) => ({ ...prev, organic: !prev.organic }))}
@@ -264,11 +260,11 @@ function FilterDrawer({ open, onClose, tags, products, appliedFilters, onApply }
 
           <Section
             title="제형"
-            extra={
+            headerExtra={
               <button
                 type="button"
                 onClick={() => setShowFormatInfo((v) => !v)}
-                className="mb-2 text-xs text-gray-400 underline"
+                className="text-xs text-gray-400 underline"
               >
                 {showFormatInfo ? '설명 닫기' : '제형 비교 더보기'}
               </button>
