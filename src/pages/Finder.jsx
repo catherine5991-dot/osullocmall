@@ -114,6 +114,7 @@ function getFlavorQuestion(caffeineGroup) {
     return {
       title: 'Flavor',
       question: '어떤 맛과 향을 좋아하세요?',
+      note: '마음이 편안해지고 차분하게 긴장을 내려놓기 좋은 무카페인 허브티를 추천해요.',
       options: [
         { label: '한 가지 허브의 향이 좋아요', value: 'pure_herb' },
         { label: '여러 허브가 어우러진 풍성한 맛과 향이 좋아요', value: 'blended_herb' },
@@ -749,6 +750,11 @@ function Finder() {
 
         {screen?.type === 'question' && (
           <div className="text-left">
+            {screen.q.note && (
+              <div className="mb-4 rounded-[2px] bg-gray-50 px-3 py-3 text-center text-base font-semibold text-gray-800">
+                {screen.q.note}
+              </div>
+            )}
             {screen.q.title && <h2 className="text-xs font-semibold text-gray-400">{screen.q.title}</h2>}
             <p className={screen.q.title ? 'mt-2 text-base' : 'text-base'}>{screen.q.question}</p>
 
