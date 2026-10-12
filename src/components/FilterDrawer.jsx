@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import { RAW_MATERIAL_DETAIL_TAGS } from '../lib/productClassification.js'
+import { KOMBUCHA_NAMES, RAW_MATERIAL_DETAIL_TAGS } from '../lib/productClassification.js'
 
-// 베이스/제형은 DB check 제약과 동일한 고정 옵션 (products.base / products.format)
+// 베이스는 DB check 제약(products.base)과 다르게 콤부차를 허브티에서 따로 뺀 가상 카테고리라
+// 고정 값 대신 test 함수로 판별함. 제형은 DB check 제약과 동일한 고정 옵션(products.format)
 const BASE_OPTIONS = [
-  { value: '녹차/말차/호지차', label: '녹차 · 말차 · 호지차' },
-  { value: '홍차/발효차', label: '홍차 · 발효차' },
-  { value: '허브', label: '허브티' },
+  { value: 'green', label: '녹차 · 말차 · 호지차', test: (p) => p.base === '녹차/말차/호지차' },
+  { value: 'fermented', label: '홍차 · 발효차', test: (p) => p.base === '홍차/발효차' },
+  { value: 'herbal', label: '허브티', test: (p) => p.base === '허브' && !KOMBUCHA_NAMES.includes(p.name) },
+  { value: 'kombucha', label: '콤부차', test: (p) => KOMBUCHA_NAMES.includes(p.name) },
 ]
 
 // 차 취향 찾기(Finder) 질문 화면과 동일한 영문 표기
@@ -92,7 +94,12 @@ export function matchesFilters(product, filters) {
   ) {
     return false
   }
-  if (filters.base.size > 0 && !filters.base.has(product.base)) return false
+  if (
+    filters.base.size > 0 &&
+    ![...filters.base].some((v) => BASE_OPTIONS.find((o) => o.value === v)?.test(product))
+  ) {
+    return false
+  }
   if (filters.format.size > 0 && !filters.format.has(product.format)) return false
   if (filters.caffeineFree && !product.is_caffeine_free) return false
   if (filters.organic && !product.is_organic) return false
