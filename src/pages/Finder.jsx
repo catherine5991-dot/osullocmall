@@ -50,6 +50,8 @@ const CATEGORY_LABELS = {
     banner: '밀크티부터 새콤달콤 티 음료까지, 다채롭게 즐기는 차',
   },
   pure_herb: { name: '순수허브', enName: 'Pure Herb', desc: '포근하고 달큰한 원물 본연의 향을 즐기는 순수 루이보스티' },
+  // Mood > 마음이 편안해지는 기분 > 한 가지 재료의 맛과 향 결과 화면도 pure_herb와 똑같은 상품 목록을 보여주므로 배너도 동일하게 맞춤
+  single: { name: '순수허브', desc: '포근하고 달큰한 원물 본연의 향을 즐기는 순수 루이보스티' },
   blended_herb: { name: '블렌디드 허브', enName: 'Blended Herb', desc: '다채로운 허브의 향과 풍미를 담은 허브티' },
   green_tea: { name: '녹차', desc: '제주 돌송이 차밭의 햇살과 한라산의 바람을 담은 향이 좋은 녹차' },
   matcha: { name: '말차', desc: '색이 좋은 제주 서광 차밭에서 차광재배로 정성껏 길러낸 말차' },
@@ -381,13 +383,12 @@ function resolveScreen(selectedCard, path) {
     }
     if (moodAns === 'calming') {
       if (subAns === undefined) return { type: 'question', q: CALMING_SUBQUESTION }
-      const intro = '차분하게 쉬고 싶은 기분에 어울리는 차를 모아봤어요'
       if (subAns === 'single') {
-        return { type: 'result', intro, matcher: (p) => PURE_HERB_NAMES.includes(p.name) }
+        return { type: 'result', matcher: (p) => PURE_HERB_NAMES.includes(p.name) }
       }
       return {
         type: 'result',
-        intro,
+        intro: '차분하게 쉬고 싶은 기분에 어울리는 차를 모아봤어요',
         matcher: (p) => hasAnyAromaTag(p) || FRUITY_HERB_NAMES.includes(p.name) || HERBAL_ESSENCE_NAMES.includes(p.name),
       }
     }
