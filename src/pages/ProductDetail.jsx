@@ -73,7 +73,7 @@ function ProductDetail() {
 
     supabase
       .from('products')
-      .select('id, name, description, heritage_copy, price, base, format, is_caffeine_free, product_tags(tags(name, category))')
+      .select('id, name, description, heritage_copy, price, base, format, is_caffeine_free, is_organic, product_tags(tags(name, category))')
       .eq('id', id)
       .single()
       .then(({ data, error }) => {
@@ -181,6 +181,11 @@ function ProductDetail() {
           {product.is_caffeine_free && (
             <span className="shrink-0 rounded-[2px] bg-sub-light px-1.5 py-0.5 text-[10px] font-normal text-gray-700">
               무카페인
+            </span>
+          )}
+          {product.is_organic && (
+            <span className="shrink-0 rounded-[2px] bg-sub-light px-1.5 py-0.5 text-[10px] font-normal text-gray-700">
+              유기농
             </span>
           )}
         </h1>
