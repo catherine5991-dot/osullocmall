@@ -127,6 +127,7 @@ function getFlavorQuestion(caffeineGroup) {
   const NOTE_BY_CAFFEINE_GROUP = {
     morning: '활기찬 하루의 시작을 위한 향긋한 차를 추천해요.',
     afternoon: '집중이 필요한 순간, 맑고 깊은 풍미의 차를 추천해요.',
+    any: '시간에 구애받지 않고 취향대로 즐기는 차를 추천해요.',
   }
   return {
     title: 'Flavor',
