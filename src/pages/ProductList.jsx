@@ -139,8 +139,10 @@ function ProductList() {
       })
   }, [])
 
+  // 드로어 필터가 적용된 동안에는 상단 베이스 알약 선택(숨겨져 있어 더 이상 바꿀 수 없음)이
+  // 몰래 교집합으로 섞여 들어가 결과가 덜 나오지 않도록 베이스 알약 조건을 건너뜀
   const filtered = products
-    .filter((p) => matchesBaseFilter(p, activeBase))
+    .filter((p) => hasActiveFilters(filters) || matchesBaseFilter(p, activeBase))
     .filter((p) => matchesFilters(p, filters))
 
   const sortedFiltered = [...filtered]
@@ -267,7 +269,10 @@ function ProductList() {
         tags={tags}
         products={products.filter((p) => matchesBaseFilter(p, activeBase))}
         appliedFilters={filters}
-        onApply={setFilters}
+        onApply={(next) => {
+          setFilters(next)
+          if (hasActiveFilters(next)) setActiveBase(null)
+        }}
       />
     </div>
   )
