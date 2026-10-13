@@ -131,7 +131,7 @@ const TIME_QUESTION = {
   ],
 }
 
-function getFlavorQuestion(caffeineGroup) {
+function getFlavorQuestion(caffeineGroup, showNote = true) {
   if (caffeineGroup === 'decaf') {
     return {
       title: 'Flavor',
@@ -154,7 +154,7 @@ function getFlavorQuestion(caffeineGroup) {
   return {
     title: 'Flavor',
     question: '어떤 맛과 향을 좋아하세요?',
-    note: NOTE_BY_CAFFEINE_GROUP[caffeineGroup],
+    note: showNote ? NOTE_BY_CAFFEINE_GROUP[caffeineGroup] : undefined,
     options: [
       { label: '차 그대로의 맛과 향이 좋아요', value: 'pure_tea' },
       { label: '차에 다채로운 향이 더해진 풍성한 맛이 좋아요', value: 'blended_tea' },
@@ -397,7 +397,7 @@ function resolveScreen(selectedCard, path) {
   if (selectedCard === 'flavor') {
     const [flavorAns, subAns] = path
     // Time 답변 없이 바로 시작하는 경우라 caffeine/decaf 구분이 없음 → 'any'와 동일하게 3지선다
-    if (flavorAns === undefined) return { type: 'question', q: getFlavorQuestion('any') }
+    if (flavorAns === undefined) return { type: 'question', q: getFlavorQuestion('any', false) }
     if (subAns === undefined) {
       const q = SUBQUESTION_BY_FLAVOR[flavorAns]
       return q ? { type: 'question', q } : null
