@@ -38,7 +38,9 @@ function GnbDrawer({ open, onClose }) {
           <button
             type="button"
             onClick={() => setProductOpen((v) => !v)}
-            className="flex w-full items-center justify-between px-5 py-4 text-base font-semibold text-primary"
+            className={`flex w-full items-center justify-between px-5 py-4 text-base font-semibold ${
+              productOpen ? 'text-primary' : 'text-gray-900'
+            }`}
           >
             제품
             <span aria-hidden>{productOpen ? '︿' : '﹀'}</span>
