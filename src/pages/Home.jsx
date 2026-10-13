@@ -16,8 +16,13 @@ function Home() {
 
   return (
     <div
-      className="relative flex min-h-svh flex-col items-center justify-center gap-6 bg-cover px-6 text-center"
-      style={{ backgroundImage: `url(${homeIntroBg})`, backgroundPosition: '30% center' }}
+      className="relative flex min-h-svh flex-col items-center justify-center gap-6 px-6 text-center"
+      style={{
+        backgroundImage: `url(${homeIntroBg})`,
+        backgroundPosition: '30% center',
+        backgroundSize: 'auto 160%',
+        backgroundRepeat: 'no-repeat',
+      }}
     >
       <button
         type="button"
