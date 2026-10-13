@@ -3,7 +3,7 @@ import Header from './Header.jsx'
 
 function Layout() {
   const { pathname } = useLocation()
-  const hideHeader = pathname.startsWith('/finder')
+  const hideHeader = pathname.startsWith('/finder') || pathname === '/'
 
   return (
     <div className="flex min-h-svh flex-col">

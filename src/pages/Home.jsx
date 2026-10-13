@@ -1,36 +1,46 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import homeIntroBg from '../assets/home-intro-bg.png'
+import menuIcon from '../assets/icon-menu.png'
+import GnbDrawer from '../components/GnbDrawer.jsx'
 
 // 홈 화면 문구는 여기 한 곳에서만 관리
 const HOME_COPY = {
   title: 'Find Your Taste',
   descriptionLines: ['마음에 드는 카드를 고르다 보면', '오늘 마시고 싶은 차를 만날 수 있어요.'],
-  button: '차 취향 찾기 시작',
+  button: '시작하기',
 }
 
 function Home() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
-    <div className="flex flex-col items-center gap-6 px-6 pt-16 text-center">
-      <h1 className="text-2xl font-semibold">{HOME_COPY.title}</h1>
-      <p className="text-sm text-gray-600">
+    <div
+      className="relative flex min-h-svh flex-col items-center justify-center gap-6 bg-cover bg-center px-6 text-center"
+      style={{ backgroundImage: `url(${homeIntroBg})` }}
+    >
+      <button
+        type="button"
+        aria-label="메뉴 열기"
+        onClick={() => setMenuOpen(true)}
+        className="absolute top-6 left-6 flex h-6 w-6 items-center justify-center"
+      >
+        <img src={menuIcon} alt="" className="h-6 w-6" />
+      </button>
+
+      <GnbDrawer open={menuOpen} onClose={() => setMenuOpen(false)} />
+
+      <h1 className="text-3xl font-bold tracking-[0.1em] text-white uppercase drop-shadow">{HOME_COPY.title}</h1>
+      <p className="text-sm leading-relaxed text-white/90 drop-shadow">
         {HOME_COPY.descriptionLines[0]}
         <br />
         {HOME_COPY.descriptionLines[1]}
       </p>
       <Link
         to="/finder"
-        className="flex items-center gap-1.5 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white"
+        className="rounded-full bg-white/90 px-10 py-3 text-sm font-semibold text-gray-900"
       >
         {HOME_COPY.button}
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M5 12H19" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-          <path
-            d="M13 6L19 12L13 18"
-            stroke="white"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
       </Link>
     </div>
   )

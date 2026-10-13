@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import arrowIcon from '../assets/icon-arrow.png'
-import finderIntroBg from '../assets/finder-intro-bg.png'
 import CardCarousel from '../components/CardCarousel.jsx'
 import cartIcon from '../assets/icon-cart.png'
 import menuIcon from '../assets/icon-menu.png'
@@ -637,8 +636,6 @@ function OptionButton({ opt, letter, onSelect }) {
 
 function Finder() {
   const navigate = useNavigate()
-  // 맨 처음 보여주는 'FIND YOUR TASTE' 인트로 화면 (시작하기를 누르면 카드 선택 화면으로 넘어감)
-  const [showIntro, setShowIntro] = useState(true)
   // step 0: 카드 선택 화면, step 1~: 질문/결과 화면
   const [step, setStep] = useState(0)
   const [selectedCard, setSelectedCard] = useState(null)
@@ -689,40 +686,6 @@ function Finder() {
       }
       return new Set([tag])
     })
-  }
-
-  if (showIntro) {
-    return (
-      <div
-        className="relative flex min-h-svh flex-col items-center justify-end bg-cover bg-center px-6 pb-14 text-center"
-        style={{ backgroundImage: `url(${finderIntroBg})` }}
-      >
-        <button
-          type="button"
-          aria-label="메뉴 열기"
-          onClick={() => setMenuOpen(true)}
-          className="absolute top-6 left-6 flex h-6 w-6 items-center justify-center"
-        >
-          <img src={menuIcon} alt="" className="h-6 w-6" />
-        </button>
-
-        <GnbDrawer open={menuOpen} onClose={() => setMenuOpen(false)} />
-
-        <h1 className="text-3xl font-bold tracking-[0.1em] text-white uppercase drop-shadow">Find Your Taste</h1>
-        <p className="mt-3 text-sm leading-relaxed text-white/90 drop-shadow">
-          마음에 드는 카드를 고르다 보면
-          <br />
-          오늘 마시고 싶은 차를 만날 수 있어요.
-        </p>
-        <button
-          type="button"
-          onClick={() => setShowIntro(false)}
-          className="mt-6 rounded-full bg-white/90 px-10 py-3 text-sm font-semibold text-gray-900"
-        >
-          시작하기
-        </button>
-      </div>
-    )
   }
 
   return (
