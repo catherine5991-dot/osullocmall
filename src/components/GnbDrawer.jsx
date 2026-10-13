@@ -24,7 +24,7 @@ function GnbDrawer({ open, onClose }) {
         className="absolute inset-0 bg-black/40"
       />
 
-      <div className="absolute inset-y-0 left-0 flex w-[85%] max-w-[420px] flex-col overflow-y-auto bg-white">
+      <div className="absolute inset-y-0 left-0 flex w-[85%] max-w-[420px] flex-col overflow-y-auto bg-white text-left">
         <div className="flex items-center justify-between px-5 py-4">
           <span className="text-sm text-gray-600">
             로그인 <span aria-hidden>&gt;</span>
