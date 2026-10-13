@@ -19,7 +19,7 @@ function Home() {
       className="relative flex min-h-svh flex-col items-center justify-center gap-6 px-6 text-center"
       style={{
         backgroundImage: `url(${homeIntroBg})`,
-        backgroundPosition: '30% center',
+        backgroundPosition: '44% 34%',
         backgroundSize: 'auto 160%',
         backgroundRepeat: 'no-repeat',
       }}
